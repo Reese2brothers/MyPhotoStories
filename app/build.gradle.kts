@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
+    id ("com.google.dagger.hilt.android")
 }
 
 android {
@@ -30,17 +32,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
     packaging {
         resources {
@@ -66,4 +68,37 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //Compose navigation
+    debugImplementation("androidx.navigation:navigation-compose:2.7.7")
+    debugImplementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation ("androidx.navigation:navigation-compose:2.8.0-alpha08")
+
+    //Room
+    implementation ("androidx.room:room-runtime:2.6.0")
+    implementation ("androidx.room:room-ktx:2.6.0")
+    ksp ("androidx.room:room-compiler:2.6.0")
+
+    //
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+    implementation ("androidx.compose.runtime:runtime:1.6.7")
+
+    //StatusBarColor
+    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.19.0")
+    implementation ("com.google.accompanist:accompanist-pager:0.30.1")
+    implementation ("com.google.accompanist:accompanist-pager-indicators:0.30.1")
+
+    //Hilt
+    implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation ("com.google.dagger:hilt-android:2.48.1")
+    ksp ("com.google.dagger:hilt-android-compiler:2.48.1")
+
+    // ViewModel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+
+    //Coil
+    implementation("io.coil-kt:coil-compose:2.1.0")
 }
