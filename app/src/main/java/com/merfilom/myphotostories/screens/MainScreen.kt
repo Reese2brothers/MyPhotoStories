@@ -1,8 +1,12 @@
 package com.merfilom.myphotostories.screens
 
+import android.app.Activity
+import android.content.Context
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,32 +17,40 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.merfilom.myphotostories.R
 
-@Preview(showBackground = true)
+
 @Composable
-fun MainScreen(){
+fun MainScreen(context : Context, navController: NavController){
     val listState = rememberLazyListState()
+    val activity = LocalContext.current as? Activity
+
+    // Обработчик кнопки "Назад"
+    BackHandler {
+        activity?.finishAffinity()
+    }
 
     Box(
         Modifier.fillMaxSize()
@@ -47,19 +59,29 @@ fun MainScreen(){
             Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Row (Modifier.fillMaxWidth().height(70.dp).background(
-                        brush = Brush.verticalGradient(colors = listOf(
+            Row (
+                Modifier
+                    .fillMaxWidth()
+                    .height(70.dp)
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
                                 colorResource(id = R.color.orange),
-                                colorResource(id = R.color.white)))),
+                                colorResource(id = R.color.white),
+                                colorResource(id = R.color.orange)
+                            )
+                        )
+                    ),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Card(
                     Modifier
                         .background(Color.Transparent)
-                        .padding(start = 8.dp),
+                        .padding(start = 4.dp),
                     shape = RoundedCornerShape(8.dp),
-                    border = BorderStroke(width = 2.dp, color = Color.Black)
+                    border = BorderStroke(width = 1.dp, color = Color.Black),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
                 ) {
                     Row(
                         Modifier.background(Color.White),
@@ -68,38 +90,42 @@ fun MainScreen(){
                     ) {
                         Image(painter = painterResource(id = R.drawable.photo), contentDescription = "label",
                             modifier = Modifier.size(60.dp))
-                        Text(text = "Your Stories",  Modifier.padding(end = 8.dp),
+                        Text(text = "P&V Stories",  Modifier.padding(end = 8.dp),
                             fontSize = 24.sp,
                             color = colorResource(id = R.color.black),
                             fontWeight = FontWeight.Bold)
                     }
                 }
                 Row (
-                    modifier = Modifier.padding(end = 8.dp, bottom = 8.dp).wrapContentWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    modifier = Modifier
+                        .padding(end = 4.dp, bottom = 8.dp)
+                        .wrapContentWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ){
                     Column(
                         verticalArrangement = Arrangement.SpaceEvenly,
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.clickable { navController.navigate("MenuScreen") }
                     ) {
                         Image(painter = painterResource(id = R.drawable.baseline_menu_24), contentDescription = "menu",
-                            modifier = Modifier.size(35.dp))
-//                        Text(text = "menu",  Modifier.padding(end = 8.dp),
-//                            fontSize = 10.sp,
-//                            color = colorResource(id = R.color.black),
-//                            fontWeight = FontWeight.Bold)
+                            modifier = Modifier.size(30.dp))
+                        Text(text = "menu",  Modifier.padding(start = 6.dp, end = 8.dp),
+                            fontSize = 10.sp,
+                            color = colorResource(id = R.color.black),
+                            fontWeight = FontWeight.Bold)
                     }
                     Column (
                         verticalArrangement = Arrangement.SpaceEvenly,
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.clickable { (context as Activity).finishAffinity() }
                     ){
                         Image(painter = painterResource(id = R.drawable.baseline_output_24), contentDescription = "exit",
                         modifier = Modifier.size(30.dp))
-//                        Text(text = "exit",  Modifier.padding(end = 8.dp),
-//                            fontSize = 10.sp,
-//                            color = colorResource(id = R.color.black),
-//                            fontWeight = FontWeight.Bold)
+                        Text(text = "exit",  Modifier.padding(start = 6.dp, end = 8.dp),
+                            fontSize = 10.sp,
+                            color = colorResource(id = R.color.black),
+                            fontWeight = FontWeight.Bold)
                     }
 
 
@@ -115,21 +141,17 @@ fun MainScreen(){
                 Card(
                     Modifier
                         .weight(1f)
-                        .padding(start = 8.dp, top = 8.dp, bottom = 8.dp, end = 4.dp)
+                        .padding(start = 4.dp, top = 4.dp, bottom = 4.dp, end = 2.dp)
                         .background(Color.Transparent),
-                    shape = RoundedCornerShape(8.dp)
+                    shape = RoundedCornerShape(8.dp),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
                 ) {
-                    Box (
-                        Modifier
-                            .wrapContentWidth()
-                            .background(
-                                brush = Brush.radialGradient(
+                    Column (
+                        Modifier.wrapContentWidth().background(brush = Brush.horizontalGradient(
                                     colors = listOf(
+                                        colorResource(id = R.color.orange),
                                         colorResource(id = R.color.white),
-                                        colorResource(id = R.color.orange)
-                                    ),
-                                    radius = 1000f
-                                )
+                                        colorResource(id = R.color.orange)))
                             )){
                             Row(
                                 modifier = Modifier
@@ -138,6 +160,7 @@ fun MainScreen(){
                                     .background(
                                         brush = Brush.verticalGradient(
                                             colors = listOf(
+                                                colorResource(id = R.color.orange),
                                                 colorResource(id = R.color.white),
                                                 colorResource(id = R.color.orange)
                                             )
@@ -159,6 +182,9 @@ fun MainScreen(){
                         LazyColumn(modifier = Modifier
                             .fillMaxWidth()
                             .fillMaxHeight(), state = listState) {
+                            item {
+                                AddNewPhotoStory(navController)
+                            }
                             items(0) {  item ->
                                 Card(
                                     Modifier
@@ -166,7 +192,8 @@ fun MainScreen(){
                                         .height(100.dp)
                                         .padding(8.dp)
                                         .background(Color.Transparent),
-                                    shape = RoundedCornerShape(8.dp)
+                                    shape = RoundedCornerShape(8.dp),
+                                    elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
                                 ){
 
                                 }
@@ -177,17 +204,18 @@ fun MainScreen(){
                 Card(
                     Modifier
                         .weight(1f)
-                        .padding(start = 4.dp, top = 8.dp, bottom = 8.dp, end = 8.dp)
+                        .padding(start = 2.dp, top = 4.dp, bottom = 4.dp, end = 4.dp)
                         .background(Color.Transparent),
-                    shape = RoundedCornerShape(8.dp)
+                    shape = RoundedCornerShape(8.dp),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
                 ) {
-                    Box (Modifier.background(
-                        brush = Brush.radialGradient(
+                    Column (Modifier.background(
+                        brush = Brush.horizontalGradient(
                             colors = listOf(
+                                colorResource(id = R.color.orange),
                                 colorResource(id = R.color.white),
                                 colorResource(id = R.color.orange)
-                            ),
-                            radius = 1000f
+                            )
                         )
                     )){
                             Row(
@@ -197,6 +225,7 @@ fun MainScreen(){
                                     .background(
                                         brush = Brush.verticalGradient(
                                             colors = listOf(
+                                                colorResource(id = R.color.orange),
                                                 colorResource(id = R.color.white),
                                                 colorResource(id = R.color.orange)
                                             )
@@ -216,6 +245,9 @@ fun MainScreen(){
                                 )
                             }
                         LazyColumn(modifier = Modifier.fillMaxSize(), state = listState) {
+                            item {
+                                AddNewVideoStory(navController)
+                            }
                             items(0) {  item ->
                                 Card(
                                     Modifier
@@ -223,7 +255,8 @@ fun MainScreen(){
                                         .height(100.dp)
                                         .padding(8.dp)
                                         .background(Color.Transparent),
-                                    shape = RoundedCornerShape(8.dp)
+                                    shape = RoundedCornerShape(8.dp),
+                                    elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
                                 ){
 
                                 }
@@ -235,7 +268,7 @@ fun MainScreen(){
             Row (
                 Modifier
                     .fillMaxWidth()
-                    .height(70.dp)
+                    .height(20.dp)
                     .background(
                         brush = Brush.verticalGradient(
                             colors = listOf(
@@ -247,6 +280,70 @@ fun MainScreen(){
             ){
 
             }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AddNewPhotoStory(navController: NavController){
+Card (
+    modifier = Modifier.padding(4.dp).background(Color.Transparent).height(100.dp),
+    shape = RoundedCornerShape(8.dp),
+    border = BorderStroke(1.dp, color = Color.Black),
+    elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
+    onClick = {navController.navigate("NewPhotoStoryScreen")}
+){
+Column(
+    verticalArrangement = Arrangement.SpaceEvenly,
+    horizontalAlignment = Alignment.CenterHorizontally,
+    modifier = Modifier.fillMaxSize().background( brush = Brush.verticalGradient(
+        colors = listOf(
+            colorResource(id = R.color.orange),
+            colorResource(id = R.color.white),
+            colorResource(id = R.color.orange)
+        )
+    ))
+) {
+    Image(imageVector = Icons.Default.Add, contentDescription = "addnewphotostory", modifier = Modifier.size(50.dp))
+    Text("Add new story",
+        Modifier.align(alignment = Alignment.CenterHorizontally),
+        fontSize = 16.sp,
+        color = colorResource(id = R.color.black),
+        fontWeight = FontWeight.Bold,
+    )
+}
+}
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AddNewVideoStory(navController: NavController){
+    Card (
+        modifier = Modifier.padding(4.dp).background(Color.Transparent).height(100.dp),
+        shape = RoundedCornerShape(8.dp),
+        border = BorderStroke(1.dp, color = Color.Black),
+        elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
+        onClick = {navController.navigate("NewVideoStoryScreen")}
+    ){
+        Column(
+            verticalArrangement = Arrangement.SpaceEvenly,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize().background( brush = Brush.verticalGradient(
+                colors = listOf(
+                    colorResource(id = R.color.orange),
+                    colorResource(id = R.color.white),
+                    colorResource(id = R.color.orange)
+                )
+            ))
+        ) {
+            Image(imageVector = Icons.Default.Add, contentDescription = "addnewvideostory", modifier = Modifier.size(50.dp))
+            Text("Add new story",
+                Modifier.align(alignment = Alignment.CenterHorizontally),
+                fontSize = 16.sp,
+                color = colorResource(id = R.color.black),
+                fontWeight = FontWeight.Bold,
+            )
         }
     }
 }

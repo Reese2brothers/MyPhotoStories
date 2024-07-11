@@ -10,32 +10,21 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.navigation.compose.rememberNavController
+import com.merfilom.myphotostories.screens.MainScreen
+import com.merfilom.myphotostories.screens.SplashScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-           //CreateTables(context = this)
+            ScreenStatusBar(colorResource(id = R.color.black))
+            val navController = rememberNavController()
+            NavGraphNavigate(this, navController)
         }
     }
 }
 
-@Composable
-fun CreateTables(context : Context){
-    //var count = rememberSaveable { mutableStateOf(0) }
-    Box(
-        Modifier.fillMaxSize()
-    ){
-        Button(onClick = {
-//            val repository = MyRepository(AppDatabase.getDatabase(context))
-//            repository.createTableSql("first_table")
-//            repository.insertIntoDynamicTable("${count.value} table", 1, "Sample Value")
-//            count.value++
-        }) {
-            Text("Create Table")
 
-        }
-    }
-
-}
 
