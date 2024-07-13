@@ -14,7 +14,9 @@ import androidx.compose.ui.res.colorResource
 import androidx.navigation.compose.rememberNavController
 import com.merfilom.myphotostories.screens.MainScreen
 import com.merfilom.myphotostories.screens.SplashScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

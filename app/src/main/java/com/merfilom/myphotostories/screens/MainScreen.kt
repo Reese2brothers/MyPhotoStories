@@ -40,6 +40,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.merfilom.myphotostories.R
+import dagger.hilt.android.AndroidEntryPoint
+
 
 
 @Composable
