@@ -18,15 +18,23 @@ import javax.inject.Inject
 class Photo1ViewModel @Inject constructor(
     private val insert1UseCase: Insert1UseCase,
     private val delete1UseCase: Delete1UseCase,
-    private val getAll1UseCase: GetAll1UseCase
+    private val getAll1UseCase: GetAll1UseCase,
 ) : ViewModel() {
 
-    private val _photos = MutableStateFlow<List<Photo1>>(emptyList())
-    val photos: StateFlow<List<Photo1>> = _photos
+
+    private val _photos1 = MutableStateFlow<List<Photo1>>(emptyList())
+    val photos1: StateFlow<List<Photo1>> = _photos1
 
     private val _stories = MutableStateFlow<List<Story1>>(emptyList())
     val stories: StateFlow<List<Story1>> = _stories
 
+    init {
+        viewModelScope.launch {
+                getAll1UseCase.photoExecute().collect { photoList ->
+                    _photos1.value = photoList
+            }
+        }
+    }
     fun insertNewPhoto(photo1 : Photo1){
         viewModelScope.launch(Dispatchers.IO) {
             insert1UseCase.photoExecute(photo1)
@@ -47,10 +55,10 @@ class Photo1ViewModel @Inject constructor(
             delete1UseCase.storyExecute(story1)
         }
     }
-    fun getAll1NewPhoto() {
+    fun getAll1NewPhoto()  {
         viewModelScope.launch {
             getAll1UseCase.photoExecute().collect { photoList ->
-                _photos.value = photoList
+                _photos1.value = photoList
             }
         }
     }

@@ -6,11 +6,12 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Story1Entity(
-    @PrimaryKey(autoGenerate = true)
-    var idStory1Entity: Int = 0,
     @Embedded
     val photoStory1Entity: Photo1Entity
-)
+){
+    @PrimaryKey(autoGenerate = true)
+    var idStory1Entity: Int = 0
+}
 
 @Entity
 data class Story2Entity(

@@ -1,16 +1,16 @@
 package com.merfilom.myphotostories.screens
 
-import android.app.Activity
-import android.content.ContentResolver
-import android.content.Intent
+import android.Manifest
+import android.content.ContentValues
+import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.result.launch
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -38,6 +38,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -48,31 +49,62 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.app.ActivityCompat.startActivityForResult
-import coil.compose.rememberImagePainter
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.merfilom.myphotostories.R
+import com.merfilom.myphotostories.domain.models.photomodels.Photo1
+import com.merfilom.myphotostories.viewmodels.Photo1ViewModel
+import java.io.OutputStream
+import android.os.Environment
+import java.io.File
+import java.io.FileOutputStream
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
-fun AddNewPhotoScreen(){
+fun AddNewPhotoScreen(navController: NavController){
     val currentText = rememberSaveable { mutableStateOf("") }
     val context = LocalContext.current
-    var selectedImageUri by remember { mutableStateOf<Uri?>(null) }
-    val bitmap = rememberSaveable { mutableStateOf<Bitmap?>(null) }
+    var selectedImageUri by rememberSaveable { mutableStateOf<Uri?>(null) }
+    var bitmap by remember { mutableStateOf<Bitmap?>(null) }
 
-    val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.OpenDocument()) { uri: Uri? ->
-       selectedImageUri = uri
+    val cameraLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.TakePicturePreview()){
+        bitmap = it
+        bitmap?.let { bmp ->
+            selectedImageUri = saveBitmapToFile(context, bmp)
+       }
+    }
+    val photoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { uri -> selectedImageUri = uri }
+    )
+    val legacyPhotoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent(),
+        onResult = { uri -> selectedImageUri = uri }
+    )
+    val permissions = arrayOf(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.CAMERA
+    )
+    val permissionState = rememberMultiplePermissionsState(permissions.toList())
+
+    LaunchedEffect(Unit) {
+        permissionState.launchMultiplePermissionRequest()
     }
 
+    if (permissionState.allPermissionsGranted) {
     Box(
         Modifier
             .fillMaxSize()
@@ -99,22 +131,27 @@ fun AddNewPhotoScreen(){
                 shape = RoundedCornerShape(8.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
             ) {
-                selectedImageUri?.let {
-                    if(Build.VERSION.SDK_INT < 28){
-                        bitmap.value = MediaStore.Images.Media.getBitmap(context.contentResolver, it)
-                    } else {
-                        val source = ImageDecoder.createSource(context.contentResolver, it)
-                        bitmap.value = ImageDecoder.decodeBitmap(source)
-                    }
-                    bitmap.value?.let {
-                        Image(
-                            bitmap = it.asImageBitmap(),
-                            contentDescription = "selected photo",
-                            Modifier.fillMaxSize()
-                        )
-                    }
-
-                } ?: run {
+                bitmap?.let {
+                    val highQualityBitmap = it.copy(Bitmap.Config.ARGB_8888, true)
+                    highQualityBitmap.prepareToDraw()
+                    Image(
+                        bitmap = highQualityBitmap?.asImageBitmap()!!,
+                        contentDescription = "cameraBitmap",
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+                }
+                selectedImageUri?.let { uri ->
+                    AsyncImage(
+                        model = ImageRequest.Builder(context)
+                            .data(selectedImageUri)
+                            .crossfade(true)
+                            .build(),
+                        contentDescription = "item_photo",
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+               } ?: run {
                     Image(
                         painter = painterResource(id = R.drawable.photo),
                         contentDescription = "newphoto",
@@ -131,7 +168,6 @@ fun AddNewPhotoScreen(){
                             )
                     )
                 }
-
             }
             TextField(
                 colors = TextFieldDefaults.textFieldColors(
@@ -153,20 +189,39 @@ fun AddNewPhotoScreen(){
                     .padding(start = 4.dp, end = 4.dp),
                 textStyle = TextStyle(fontSize = 20.sp),
                 trailingIcon = {
-                    Icon(imageVector = Icons.Default.Clear, contentDescription = "clear")
+                    Icon(imageVector = Icons.Default.Clear, contentDescription = "clear",
+                        modifier = Modifier.clickable { currentText.value = "" })
                 },
                 placeholder = {
                     Text(text = "Enter a description of the photo...", fontSize = 14.sp,)
                 }
                 )
-            MovePanel { launcher.launch(arrayOf("image/*")) }
+            MovePanel ({
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    photoPickerLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                } else {
+                    legacyPhotoPickerLauncher.launch("image/*")
+                }
+            }, { cameraLauncher.launch() },
+                currentText.value, selectedImageUri, navController)
+
 
 
         }
     }
+    } else {
+        Text(
+            text = "Permissions are required to display photos.",
+            color = Color.Red,
+            modifier = Modifier.padding(16.dp)
+        )
+    }
 }
+
+
 @Composable
-fun MovePanel(launchPhotoPicker: () -> Unit) {
+fun MovePanel(launchPhotoPicker: () -> Unit, launchPhotoCameraPicker: () -> Unit,currentText : String, selectedImageUri : Uri?, navController: NavController) {
+    val viewModel: Photo1ViewModel = hiltViewModel()
     Card(
         Modifier
             .fillMaxWidth()
@@ -193,7 +248,8 @@ fun MovePanel(launchPhotoPicker: () -> Unit) {
         ){
             Column (
                 verticalArrangement = Arrangement.SpaceEvenly,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.clickable { launchPhotoCameraPicker() }
             ){
                 Image(painter = painterResource(id = R.drawable.baseline_camera_24), contentDescription = "camera", modifier = Modifier.size(30.dp))
                 Text(text = "camera",  Modifier.align(alignment = Alignment.CenterHorizontally),
@@ -225,7 +281,12 @@ fun MovePanel(launchPhotoPicker: () -> Unit) {
             }
             Column (
                 verticalArrangement = Arrangement.SpaceEvenly,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.clickable {
+                    val photo1 = Photo1(content = currentText, image = selectedImageUri.toString())
+                    viewModel.insertNewPhoto(photo1 = photo1)
+                    navController.navigate("NewPhotoStoryScreen")
+                }
             ){
                 Image(painter = painterResource(id = R.drawable.baseline_save_24), contentDescription = "savePhoto", modifier = Modifier.size(25.dp))
                 Text(text = "save photo",  Modifier.align(alignment = Alignment.CenterHorizontally),
@@ -235,5 +296,34 @@ fun MovePanel(launchPhotoPicker: () -> Unit) {
             }
         }
     }
+}
+fun saveBitmapToFile(context: Context, bitmap: Bitmap): Uri? {
+    val filename = "IMG_${System.currentTimeMillis()}.jpg"
+    var fos: OutputStream? = null
+    var imageUri: Uri? = null
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        context.contentResolver?.also { resolver ->
+            val contentValues = ContentValues().apply {
+                put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
+                put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+                put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+            }
+
+            val imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+            fos = imageUri?.let { resolver.openOutputStream(it) }
+        }
+    } else {
+        val imagesDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val image = File(imagesDir, filename)
+        fos = FileOutputStream(image)
+        imageUri = Uri.fromFile(image)
+    }
+
+    fos?.use {
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
+    }
+
+    return imageUri
 }
 

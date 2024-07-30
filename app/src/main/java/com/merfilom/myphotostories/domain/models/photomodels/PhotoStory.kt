@@ -2,7 +2,6 @@ package com.merfilom.myphotostories.domain.models.photomodels
 
 
 data class Story1(
-    var idStory1: Int = 0,
     val photoStory1: Photo1
 )
 

@@ -13,10 +13,7 @@ class PhotoStory1ListMapper: PhotoMapperInterface<List<Story1Entity>, List<Story
         type.forEach { photoEntity ->
             listPhoto.add(
                 Story1(
-                    idStory1 = photoEntity.idStory1Entity,
                     photoStory1 = Photo1(
-                        id = photoEntity.idStory1Entity,
-                        title = photoEntity.photoStory1Entity.titleEntity,
                         content = photoEntity.photoStory1Entity.contentEntity,
                         image = photoEntity.photoStory1Entity.imageEntity
                     )
@@ -31,10 +28,7 @@ class PhotoStory1ListMapper: PhotoMapperInterface<List<Story1Entity>, List<Story
         type.forEach { photo ->
             listPhotoEntity.add(
                 Story1Entity(
-                    idStory1Entity = photo.idStory1,
                     photoStory1Entity =  Photo1Entity(
-                        idEntity = photo.idStory1,
-                        titleEntity = photo.photoStory1.title,
                         contentEntity = photo.photoStory1.content,
                         imageEntity = photo.photoStory1.image
                     )

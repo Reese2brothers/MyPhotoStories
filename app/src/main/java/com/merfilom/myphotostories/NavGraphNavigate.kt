@@ -32,7 +32,7 @@ fun NavGraphNavigate(context : Context, navController: NavHostController) {
             MenuScreen(navController = navController)
         }
         composable("AddNewPhotoScreen"){
-            AddNewPhotoScreen()
+            AddNewPhotoScreen(navController = navController)
         }
     }
 }

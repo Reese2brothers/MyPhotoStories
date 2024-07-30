@@ -5,12 +5,12 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Photo1Entity(
-    @PrimaryKey(autoGenerate = true)
-    var idEntity: Int = 0,
-    val titleEntity: String,
     val contentEntity: String,
     val imageEntity: String
-)
+){
+    @PrimaryKey(autoGenerate = true)
+    var idEntity: Int = 0
+}
 
 @Entity
 data class Photo2Entity(

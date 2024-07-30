@@ -88,6 +88,7 @@ dependencies {
     implementation ("com.google.accompanist:accompanist-systemuicontroller:0.19.0")
     implementation ("com.google.accompanist:accompanist-pager:0.30.1")
     implementation ("com.google.accompanist:accompanist-pager-indicators:0.30.1")
+    implementation ("com.google.accompanist:accompanist-permissions:0.30.1")
 
     //Hilt
     implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
@@ -101,5 +102,14 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
 
     //Coil
-    implementation("io.coil-kt:coil-compose:2.1.0")
+    implementation("io.coil-kt:coil-compose:2.2.2")
+
+// CameraX
+    val camerax_version = ("1.0.1")
+    //noinspection GradleDependency
+    implementation ("androidx.camera:camera-camera2:$camerax_version")
+    //noinspection GradleDependency
+    implementation ("androidx.camera:camera-lifecycle:$camerax_version")
+    implementation ("androidx.camera:camera-view:1.4.0-beta02")
+
 }

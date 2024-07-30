@@ -1,20 +1,31 @@
 package com.merfilom.myphotostories.data.repositories.photostoryimpl
 
 import com.merfilom.myphotostories.data.dao.photodao.Story1EntityDao
+import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo1ListMapper
+import com.merfilom.myphotostories.data.mappers.photomapper.Photo1Mapper
+import com.merfilom.myphotostories.data.mappers.photostorylistmapper.PhotoStory1ListMapper
+import com.merfilom.myphotostories.data.mappers.photostorymapper.PhotoStory1Mapper
 import com.merfilom.myphotostories.domain.models.photomodels.Story1
 import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStory1Repository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class PhotoStory1RepositoryImpl(story1EntityDao: Story1EntityDao) : PhotoStory1Repository{
+class PhotoStory1RepositoryImpl(private val story1EntityDao: Story1EntityDao) : PhotoStory1Repository{
+    private val photoStory1Mapper: PhotoStory1Mapper = PhotoStory1Mapper()
+    private val photoStory1ListMapper: PhotoStory1ListMapper = PhotoStory1ListMapper()
     override fun getAll(): Flow<List<Story1>> {
-        TODO("Not yet implemented")
+        return story1EntityDao.getAll().map { entities ->
+            photoStory1ListMapper.mapFromEntity(entities)
+        }
     }
 
     override suspend fun insertStory1(story1: Story1) {
-        TODO("Not yet implemented")
+        val entity = photoStory1Mapper.mapToEntity(story1)
+        story1EntityDao.insertStory(entity)
     }
 
     override suspend fun deleteStory1(story1: Story1) {
-        TODO("Not yet implemented")
+        val entity = photoStory1Mapper.mapToEntity(story1)
+        story1EntityDao.deleteStory(entity)
     }
 }

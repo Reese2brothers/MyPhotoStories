@@ -1,10 +1,6 @@
 package com.merfilom.myphotostories.domain.models.photomodels
 
-import androidx.room.PrimaryKey
-
 data class Photo1(
-    var id: Int = 0,
-    val title: String,
     val content: String,
     val image: String
 )

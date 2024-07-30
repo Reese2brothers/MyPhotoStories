@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -28,6 +29,10 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -38,8 +43,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.merfilom.myphotostories.R
+import com.merfilom.myphotostories.domain.models.photomodels.Story1
+import com.merfilom.myphotostories.viewmodels.Photo1ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -48,6 +56,8 @@ import dagger.hilt.android.AndroidEntryPoint
 fun MainScreen(context : Context, navController: NavController){
     val listState = rememberLazyListState()
     val activity = LocalContext.current as? Activity
+    val viewModel: Photo1ViewModel = hiltViewModel()
+    val stories by viewModel.stories.collectAsState()
 
     // Обработчик кнопки "Назад"
     BackHandler {
@@ -149,11 +159,16 @@ fun MainScreen(context : Context, navController: NavController){
                     elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
                 ) {
                     Column (
-                        Modifier.wrapContentWidth().background(brush = Brush.horizontalGradient(
+                        Modifier
+                            .wrapContentWidth()
+                            .background(
+                                brush = Brush.horizontalGradient(
                                     colors = listOf(
                                         colorResource(id = R.color.orange),
                                         colorResource(id = R.color.white),
-                                        colorResource(id = R.color.orange)))
+                                        colorResource(id = R.color.orange)
+                                    )
+                                )
                             )){
                             Row(
                                 modifier = Modifier
@@ -187,7 +202,7 @@ fun MainScreen(context : Context, navController: NavController){
                             item {
                                 AddNewPhotoStory(navController)
                             }
-                            items(0) {  item ->
+                            items(stories) {  item ->
                                 Card(
                                     Modifier
                                         .fillMaxWidth()
@@ -290,7 +305,10 @@ fun MainScreen(context : Context, navController: NavController){
 @Composable
 fun AddNewPhotoStory(navController: NavController){
 Card (
-    modifier = Modifier.padding(4.dp).background(Color.Transparent).height(100.dp),
+    modifier = Modifier
+        .padding(4.dp)
+        .background(Color.Transparent)
+        .height(100.dp),
     shape = RoundedCornerShape(8.dp),
     border = BorderStroke(1.dp, color = Color.Black),
     elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
@@ -299,13 +317,17 @@ Card (
 Column(
     verticalArrangement = Arrangement.SpaceEvenly,
     horizontalAlignment = Alignment.CenterHorizontally,
-    modifier = Modifier.fillMaxSize().background( brush = Brush.verticalGradient(
-        colors = listOf(
-            colorResource(id = R.color.orange),
-            colorResource(id = R.color.white),
-            colorResource(id = R.color.orange)
+    modifier = Modifier
+        .fillMaxSize()
+        .background(
+            brush = Brush.verticalGradient(
+                colors = listOf(
+                    colorResource(id = R.color.orange),
+                    colorResource(id = R.color.white),
+                    colorResource(id = R.color.orange)
+                )
+            )
         )
-    ))
 ) {
     Image(imageVector = Icons.Default.Add, contentDescription = "addnewphotostory", modifier = Modifier.size(50.dp))
     Text("Add new story",
@@ -322,7 +344,10 @@ Column(
 @Composable
 fun AddNewVideoStory(navController: NavController){
     Card (
-        modifier = Modifier.padding(4.dp).background(Color.Transparent).height(100.dp),
+        modifier = Modifier
+            .padding(4.dp)
+            .background(Color.Transparent)
+            .height(100.dp),
         shape = RoundedCornerShape(8.dp),
         border = BorderStroke(1.dp, color = Color.Black),
         elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
@@ -331,13 +356,17 @@ fun AddNewVideoStory(navController: NavController){
         Column(
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize().background( brush = Brush.verticalGradient(
-                colors = listOf(
-                    colorResource(id = R.color.orange),
-                    colorResource(id = R.color.white),
-                    colorResource(id = R.color.orange)
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            colorResource(id = R.color.orange),
+                            colorResource(id = R.color.white),
+                            colorResource(id = R.color.orange)
+                        )
+                    )
                 )
-            ))
         ) {
             Image(imageVector = Icons.Default.Add, contentDescription = "addnewvideostory", modifier = Modifier.size(50.dp))
             Text("Add new story",
