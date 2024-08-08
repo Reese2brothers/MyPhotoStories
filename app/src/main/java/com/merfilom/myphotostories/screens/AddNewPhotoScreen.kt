@@ -80,6 +80,12 @@ fun AddNewPhotoScreen(navController: NavController){
     var bitmap by remember { mutableStateOf<Bitmap?>(null) }
 
     val cameraLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.TakePicturePreview()){
+//        if (isSuccess) {
+//            // Обработка захваченного изображения
+//            bitmap?.let { bmp ->
+//                selectedImageUri = saveBitmapToFile(context, bmp)
+//            }
+        //}
         bitmap = it
         bitmap?.let { bmp ->
             selectedImageUri = saveBitmapToFile(context, bmp)
@@ -202,7 +208,7 @@ fun AddNewPhotoScreen(navController: NavController){
                 } else {
                     legacyPhotoPickerLauncher.launch("image/*")
                 }
-            }, { cameraLauncher.launch() },
+            }, { cameraLauncher.launch()},
                 currentText.value, selectedImageUri, navController)
 
 
