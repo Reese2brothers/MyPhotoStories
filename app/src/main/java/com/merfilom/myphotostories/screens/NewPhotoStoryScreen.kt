@@ -105,10 +105,7 @@ Box(
                         shape = RoundedCornerShape(8.dp),
                         elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                         onClick = {
-                            Log.d("TAG", "item.image for big : ${item.image}")
-                            Log.d("TAG", "bigPhotoBefore : ${bigPhoto.value}")
                             bigPhoto.value = item.image.toUri()
-                            Log.d("TAG", "bigPhotoAfter : ${bigPhoto.value}")
                             bigText.value = item.content
                         }
                     ){

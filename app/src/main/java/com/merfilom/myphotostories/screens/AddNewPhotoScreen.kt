@@ -68,6 +68,7 @@ import com.merfilom.myphotostories.domain.models.photomodels.Photo1
 import com.merfilom.myphotostories.viewmodels.Photo1ViewModel
 import java.io.OutputStream
 import android.os.Environment
+import android.util.Log
 import androidx.core.content.FileProvider
 import java.io.File
 import java.io.FileOutputStream
@@ -92,11 +93,15 @@ fun AddNewPhotoScreen(navController: NavController){
     }
     val photoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
-        onResult = { uri -> selectedImageUri = uri }
+        onResult = { uri ->
+            uri?.let { selectedImageUri = saveImageToFile(context, it) }
+        }
     )
     val legacyPhotoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
-        onResult = { uri -> selectedImageUri = uri }
+        onResult = { uri ->
+            uri?.let { selectedImageUri = saveImageToFile(context, it) }
+        }
     )
     val permissions = arrayOf(
         Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -307,4 +312,19 @@ fun MovePanel(launchPhotoPicker: () -> Unit, launchPhotoCameraPicker: () -> Unit
         }
     }
 }
-
+fun saveImageToFile(context: Context, uri: Uri): Uri {
+    val inputStream = context.contentResolver.openInputStream(uri)
+    val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
+    val storageDir: File = File(context.getExternalFilesDir(null), "images")
+    if (!storageDir.exists()) {
+        storageDir.mkdirs()
+    }
+    val photoFile = File(storageDir, "JPEG_${timeStamp}.jpg")
+    if (!photoFile.exists()) {
+        val outputStream = FileOutputStream(photoFile)
+        inputStream?.copyTo(outputStream)
+        inputStream?.close()
+        outputStream.close()
+    }
+    return FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", photoFile)
+}
