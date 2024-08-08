@@ -68,8 +68,12 @@ import com.merfilom.myphotostories.domain.models.photomodels.Photo1
 import com.merfilom.myphotostories.viewmodels.Photo1ViewModel
 import java.io.OutputStream
 import android.os.Environment
+import androidx.core.content.FileProvider
 import java.io.File
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
@@ -79,17 +83,12 @@ fun AddNewPhotoScreen(navController: NavController){
     var selectedImageUri by rememberSaveable { mutableStateOf<Uri?>(null) }
     var bitmap by remember { mutableStateOf<Bitmap?>(null) }
 
-    val cameraLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.TakePicturePreview()){
-//        if (isSuccess) {
-//            // Обработка захваченного изображения
-//            bitmap?.let { bmp ->
-//                selectedImageUri = saveBitmapToFile(context, bmp)
-//            }
-        //}
-        bitmap = it
-        bitmap?.let { bmp ->
-            selectedImageUri = saveBitmapToFile(context, bmp)
-       }
+    val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+        if (success) {
+            selectedImageUri?.let {
+                bitmap = MediaStore.Images.Media.getBitmap(context.contentResolver, it)
+            }
+        }
     }
     val photoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
@@ -150,7 +149,7 @@ fun AddNewPhotoScreen(navController: NavController){
                 selectedImageUri?.let { uri ->
                     AsyncImage(
                         model = ImageRequest.Builder(context)
-                            .data(selectedImageUri)
+                            .data(uri)
                             .crossfade(true)
                             .build(),
                         contentDescription = "item_photo",
@@ -208,11 +207,17 @@ fun AddNewPhotoScreen(navController: NavController){
                 } else {
                     legacyPhotoPickerLauncher.launch("image/*")
                 }
-            }, { cameraLauncher.launch()},
+            }, { val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
+                val storageDir: File = context.getExternalFilesDir(null)!!
+                val photoFile = File.createTempFile(
+                    "JPEG_${timeStamp}_",
+                    ".jpg",
+                    storageDir
+                )
+                val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", photoFile)
+                selectedImageUri = uri
+                cameraLauncher.launch(uri)},
                 currentText.value, selectedImageUri, navController)
-
-
-
         }
     }
     } else {
@@ -224,9 +229,8 @@ fun AddNewPhotoScreen(navController: NavController){
     }
 }
 
-
 @Composable
-fun MovePanel(launchPhotoPicker: () -> Unit, launchPhotoCameraPicker: () -> Unit,currentText : String, selectedImageUri : Uri?, navController: NavController) {
+fun MovePanel(launchPhotoPicker: () -> Unit, launchPhotoCameraPicker: () -> Unit, currentText : String, selectedImageUri : Uri?, navController: NavController) {
     val viewModel: Photo1ViewModel = hiltViewModel()
     Card(
         Modifier
@@ -302,34 +306,5 @@ fun MovePanel(launchPhotoPicker: () -> Unit, launchPhotoCameraPicker: () -> Unit
             }
         }
     }
-}
-fun saveBitmapToFile(context: Context, bitmap: Bitmap): Uri? {
-    val filename = "IMG_${System.currentTimeMillis()}.jpg"
-    var fos: OutputStream? = null
-    var imageUri: Uri? = null
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        context.contentResolver?.also { resolver ->
-            val contentValues = ContentValues().apply {
-                put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
-                put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-                put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
-            }
-
-            val imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-            fos = imageUri?.let { resolver.openOutputStream(it) }
-        }
-    } else {
-        val imagesDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        val image = File(imagesDir, filename)
-        fos = FileOutputStream(image)
-        imageUri = Uri.fromFile(image)
-    }
-
-    fos?.use {
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
-    }
-
-    return imageUri
 }
 
