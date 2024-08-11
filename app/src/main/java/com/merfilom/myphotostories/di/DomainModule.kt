@@ -15,6 +15,7 @@ import com.merfilom.myphotostories.domain.usecases.Delete2UseCase
 import com.merfilom.myphotostories.domain.usecases.Delete3UseCase
 import com.merfilom.myphotostories.domain.usecases.Delete4UseCase
 import com.merfilom.myphotostories.domain.usecases.Delete5UseCase
+import com.merfilom.myphotostories.domain.usecases.DeleteAll1UseCase
 import com.merfilom.myphotostories.domain.usecases.GetAll1UseCase
 import com.merfilom.myphotostories.domain.usecases.GetAll2UseCase
 import com.merfilom.myphotostories.domain.usecases.GetAll3UseCase
@@ -55,6 +56,12 @@ object DomainModule {
         return  Delete5UseCase(photo5Repository = photo5Repository, story5Repository = story5Repository)
     }
 
+
+
+    @Provides
+    fun provideDeleteAll1UseCase(photo1Repository: Photo1Repository, story1Repository: PhotoStory1Repository): DeleteAll1UseCase {
+        return  DeleteAll1UseCase(photo1Repository = photo1Repository, story1Repository = story1Repository)
+    }
 
 
     @Provides

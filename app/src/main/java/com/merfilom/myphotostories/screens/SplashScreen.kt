@@ -115,7 +115,7 @@ fun SplashScreen(navController: NavController){
                     }
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Text(text = "P&V stories",
+            Text(text = "P&V Stories",
                 modifier = Modifier
                     .graphicsLayer {
                         scaleX = textscalesX

@@ -20,6 +20,10 @@ class Photo1RepositoryImpl(private val photo1EntityDao: Photo1EntityDao) : Photo
         }
     }
 
+    override suspend fun deleteAll() {
+        photo1EntityDao.deleteAll()
+    }
+
     override suspend fun insertPhoto1(photo1: Photo1) {
         val entity = photo1Mapper.mapToEntity(photo1)
         photo1EntityDao.insertPhoto(entity)
@@ -27,6 +31,6 @@ class Photo1RepositoryImpl(private val photo1EntityDao: Photo1EntityDao) : Photo
 
     override suspend fun deletePhoto1(photo1: Photo1) {
         val entity = photo1Mapper.mapToEntity(photo1)
-        photo1EntityDao.deletePhoto(entity)
+        photo1EntityDao.deletePhoto(entity.imageEntity, entity.contentEntity)
     }
 }

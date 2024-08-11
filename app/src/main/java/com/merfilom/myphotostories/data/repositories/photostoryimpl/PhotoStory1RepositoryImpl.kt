@@ -19,6 +19,10 @@ class PhotoStory1RepositoryImpl(private val story1EntityDao: Story1EntityDao) : 
         }
     }
 
+    override suspend fun deleteAll() {
+        story1EntityDao.deleteAll()
+    }
+
     override suspend fun insertStory1(story1: Story1) {
         val entity = photoStory1Mapper.mapToEntity(story1)
         story1EntityDao.insertStory(entity)

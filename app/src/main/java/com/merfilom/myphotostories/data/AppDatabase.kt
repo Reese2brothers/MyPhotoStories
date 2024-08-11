@@ -52,7 +52,6 @@ import com.merfilom.myphotostories.data.models.photomodels.Story5Entity
                     context.applicationContext,
                     AppDatabase::class.java,
                     "database")
-                    //.allowMainThreadQueries()
                     .build()
                 INSTANCE = instance
                 instance
