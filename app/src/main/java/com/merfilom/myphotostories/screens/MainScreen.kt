@@ -2,6 +2,7 @@ package com.merfilom.myphotostories.screens
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -29,6 +30,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,14 +39,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.merfilom.myphotostories.R
 import com.merfilom.myphotostories.domain.models.photomodels.Story1
 import com.merfilom.myphotostories.viewmodels.Photo1ViewModel
@@ -57,11 +64,14 @@ fun MainScreen(context : Context, navController: NavController){
     val listState = rememberLazyListState()
     val activity = LocalContext.current as? Activity
     val viewModel: Photo1ViewModel = hiltViewModel()
-    val stories by viewModel.stories.collectAsState()
+    val stories1 by viewModel.stories1.collectAsState(initial = emptyList())
 
-    // Обработчик кнопки "Назад"
     BackHandler {
         activity?.finishAffinity()
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.getAll1NewPhotoStory()
     }
 
     Box(
@@ -198,21 +208,62 @@ fun MainScreen(context : Context, navController: NavController){
                             }
                         LazyColumn(modifier = Modifier
                             .fillMaxWidth()
-                            .fillMaxHeight(), state = listState) {
+                            .fillMaxHeight(),
+                            //state = listState
+                            ) {
                             item {
                                 AddNewPhotoStory(navController)
                             }
-                            items(stories) {  item ->
+                            items(stories1) {  item ->
                                 Card(
                                     Modifier
                                         .fillMaxWidth()
-                                        .height(100.dp)
-                                        .padding(8.dp)
+                                        .height(150.dp)
+                                        .padding(4.dp)
                                         .background(Color.Transparent),
                                     shape = RoundedCornerShape(8.dp),
                                     elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
                                 ){
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .background(
+                                                brush = Brush.verticalGradient(
+                                                    colors = listOf(
+                                                        colorResource(id = R.color.orange),
+                                                        colorResource(id = R.color.white),
+                                                        colorResource(id = R.color.orange)
+                                                    )
+                                                )
+                                            )
+                                    ) {
+                                        Image(painter = painterResource(id = R.drawable.photofold), contentDescription = "photofold",
+                                            modifier = Modifier.fillMaxSize().padding(8.dp).graphicsLayer {
+                                                rotationY = -15f
+                                            }, contentScale = ContentScale.Crop)
 
+                                        val imageUri = item.photoStory1.image.toUri()
+                                        val targetPath = "content://com.merfilom.myphotostories.fileprovider/my_images/"
+                                        if (imageUri.toString().contains(targetPath)) {
+                                            val fileName = imageUri.toString().substringAfter("image=").substringBefore(".jpg") + ".jpg"
+                                            val fullUri = "$fileName".toUri()
+                                        AsyncImage(
+                                            model = ImageRequest.Builder(context)
+                                                .data(fullUri)
+                                                .crossfade(true)
+                                                .build(),
+                                            contentDescription = "item_photo",
+                                            modifier = Modifier.fillMaxSize().padding(top = 36.dp, start = 16.dp, end = 24.dp, bottom = 12.dp)
+                                                .graphicsLayer {
+                                                    rotationY = 15f
+                                                    rotationX = 15f
+                                            },
+                                            contentScale = ContentScale.Crop
+                                        )
+                                        } else {
+                                            Text("No image available", modifier = Modifier.fillMaxSize().padding(4.dp))
+                                        }
+                                    }
                                 }
                             }
                         }

@@ -79,7 +79,6 @@ fun NewPhotoStoryScreen(navController: NavController){
     val showDialogItems = remember { mutableStateOf(false) }
     var currentIndex = rememberSaveable { mutableStateOf(0) }
     var indexToDelete by remember { mutableStateOf(-1) }
-    val scope = rememberCoroutineScope()
 
     val sharedPreferences = context.getSharedPreferences("photo_prefs", Context.MODE_PRIVATE)
     val lastViewedIndex = sharedPreferences.getInt("last_viewed_index", 0)
@@ -117,7 +116,6 @@ Box(
                    currentIndex.value = if (lastViewedIndex < photos1.size) lastViewedIndex else 0
                    bigPhoto.value = photos1[currentIndex.value].image.toUri()
                    bigText.value = photos1[currentIndex.value].content
-                   //listState.animateScrollToItem(photos1.size-1)
                 } else {
                     bigPhoto.value = null
                     bigText.value = ""
@@ -129,7 +127,6 @@ Box(
                 }
             }
             LazyRow(state = listState,
-                reverseLayout = true,
                 modifier = Modifier
                     .fillMaxSize()
                     .background(
@@ -300,6 +297,8 @@ Box(
                             bigPhoto.value = null
                             bigText.value = ""
                             showDialog.value = false
+                            viewModel.insertNewPhotoStory(story1 = Story1(photoStory1 = Photo1(content = photos1.toString(), image = photos1.toString())))
+                            navController.navigate("MainScreen")
                         }) {
                         Text("Yes", color = colorResource(id = R.color.orange), fontSize = 16.sp)
                     }
@@ -379,6 +378,7 @@ fun BigPhoto(modifier: Modifier, bigPhoto : Uri?, bigText : String) {
 @Composable
 fun BottomButtons(modifier: Modifier, navController: NavController, deleteStory : () -> Unit) {
     val viewModel: Photo1ViewModel = hiltViewModel()
+    val photos1 by viewModel.photos1.collectAsState(initial = emptyList())
     Card(
         Modifier
             .fillMaxWidth()
@@ -418,8 +418,7 @@ fun BottomButtons(modifier: Modifier, navController: NavController, deleteStory 
                 verticalArrangement = Arrangement.SpaceEvenly,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.clickable {
-                    val story1 = Story1(photoStory1 = Photo1(content = viewModel.getAll1NewPhoto().toString(), image = viewModel.getAll1NewPhoto().toString()))
-                    viewModel.insertNewPhotoStory(story1 = story1)
+                    viewModel.insertNewPhotoStory(story1 = Story1(photoStory1 = Photo1(content = photos1.toString(), image = photos1.toString())))
                     navController.navigate("MainScreen")
                 }
             ){

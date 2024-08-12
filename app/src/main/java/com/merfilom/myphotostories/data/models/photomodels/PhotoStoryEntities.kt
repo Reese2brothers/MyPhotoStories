@@ -15,11 +15,12 @@ data class Story1Entity(
 
 @Entity
 data class Story2Entity(
-    @PrimaryKey(autoGenerate = true)
-    var idStory2Entity: Int = 0,
     @Embedded
     val photoStory2Entity: Photo2Entity
-)
+){
+    @PrimaryKey(autoGenerate = true)
+    var idStory2Entity: Int = 0
+}
 
 @Entity
 data class Story3Entity(

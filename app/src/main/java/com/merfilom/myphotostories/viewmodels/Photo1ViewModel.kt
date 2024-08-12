@@ -41,8 +41,8 @@ class Photo1ViewModel @Inject constructor(
     private val _photos1 = MutableStateFlow<List<Photo1>>(emptyList())
     val photos1: StateFlow<List<Photo1>> = _photos1
 
-    private val _stories = MutableStateFlow<List<Story1>>(emptyList())
-    val stories: StateFlow<List<Story1>> = _stories
+    private val _stories1 = MutableStateFlow<List<Story1>>(emptyList())
+    val stories1: StateFlow<List<Story1>> = _stories1
 
     init {
         viewModelScope.launch {
@@ -91,17 +91,19 @@ class Photo1ViewModel @Inject constructor(
             delete1UseCase.storyExecute(story1)
         }
     }
-    fun getAll1NewPhoto()  {
+    fun getAll1NewPhoto(): List<Photo1>  {
+        var photoList = emptyList<Photo1>()
         viewModelScope.launch {
-            getAll1UseCase.photoExecute().collect { photoList ->
-                _photos1.value = photoList
+            getAll1UseCase.photoExecute().collect { list ->
+                photoList = list
             }
         }
+        return photoList
     }
     fun getAll1NewPhotoStory() {
         viewModelScope.launch {
             getAll1UseCase.storyExecute().collect { storyList ->
-                _stories.value = storyList
+                _stories1.value = storyList
             }
         }
     }

@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -103,11 +104,18 @@ fun AddNewPhotoScreen(navController: NavController){
             uri?.let { selectedImageUri = saveImageToFile(context, it) }
         }
     )
-    val permissions = arrayOf(
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.CAMERA
-    )
+    val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        arrayOf(
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.CAMERA
+        )
+    } else {
+        arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+        )
+    }
     val permissionState = rememberMultiplePermissionsState(permissions.toList())
 
     LaunchedEffect(Unit) {
@@ -227,29 +235,7 @@ fun AddNewPhotoScreen(navController: NavController){
         }
     }
     } else {
-        Box (
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    brush = Brush.horizontalGradient(
-                        colors = listOf(
-                            colorResource(id = R.color.orange),
-                            colorResource(id = R.color.white),
-                            colorResource(id = R.color.orange)
-                        )
-                    )
-                ),
-            contentAlignment = Alignment.Center
-        ){
-            Text(
-                text = "Permissions are required to display photos!",
-                color = Color.Red,
-                modifier = Modifier.padding(16.dp),
-                fontSize = 34.sp,
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Bold
-            )
-        }
+        //Toast.makeText(context, "Permissions are required to display photos!", Toast.LENGTH_SHORT).show()
     }
 }
 

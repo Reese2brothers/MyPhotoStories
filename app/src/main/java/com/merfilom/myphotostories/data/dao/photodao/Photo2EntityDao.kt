@@ -11,9 +11,11 @@ import kotlinx.coroutines.flow.Flow
 interface Photo2EntityDao {
     @Query("SELECT * FROM photo2entity")
     fun getAll(): Flow<List<Photo2Entity>>
+    @Query("DELETE FROM photo2entity")
+    suspend fun deleteAll()
     @Insert
     suspend fun insertPhoto(photo2Entity: Photo2Entity)
-    @Delete
-    suspend fun deletePhoto(photo2Entity: Photo2Entity)
+    @Query("DELETE FROM photo2entity WHERE imageEntity = :image AND contentEntity = :content")
+    suspend fun deletePhoto(image: String, content: String)
 
 }
