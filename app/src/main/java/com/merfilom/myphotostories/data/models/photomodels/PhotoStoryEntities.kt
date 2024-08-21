@@ -5,9 +5,18 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Story1Entity(
+data class StoryEmptyEntity(
     @Embedded
-    val photoStory1Entity: Photo1Entity
+    val photoStoryEmptyEntity: PhotoEmptyEntity
+){
+    @PrimaryKey(autoGenerate = true)
+    var idStoryEmptyEntity: Int = 0
+}
+@Entity
+data class Story1Entity(
+//    @Embedded
+//    val photoStory1Entity: Photo1Entity
+    val imageEntity : String
 ){
     @PrimaryKey(autoGenerate = true)
     var idStory1Entity: Int = 0
@@ -24,24 +33,27 @@ data class Story2Entity(
 
 @Entity
 data class Story3Entity(
-    @PrimaryKey(autoGenerate = true)
-    var idStory3Entity: Int = 0,
     @Embedded
     val photoStory3Entity: Photo3Entity
-)
+){
+    @PrimaryKey(autoGenerate = true)
+    var idStory3Entity: Int = 0
+}
 
 @Entity
 data class Story4Entity(
-    @PrimaryKey(autoGenerate = true)
-    var idStory4Entity: Int = 0,
     @Embedded
     val photoStory4Entity: Photo4Entity
-)
+){
+    @PrimaryKey(autoGenerate = true)
+    var idStory4Entity: Int = 0
+}
 
 @Entity
 data class Story5Entity(
-    @PrimaryKey(autoGenerate = true)
-    var idStory5Entity: Int = 0,
     @Embedded
     val photoStory5Entity: Photo5Entity
-)
+){
+    @PrimaryKey(autoGenerate = true)
+    var idStory5Entity: Int = 0
+}

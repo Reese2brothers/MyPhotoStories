@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.Flow
 interface PhotoStory3Repository {
     fun getAll() : Flow<List<Story3>>
 
+    suspend fun deleteAll()
+
     suspend fun insertStory3(story3: Story3)
 
     suspend fun deleteStory3(story3: Story3)

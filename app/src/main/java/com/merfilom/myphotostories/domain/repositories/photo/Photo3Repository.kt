@@ -6,7 +6,11 @@ import kotlinx.coroutines.flow.Flow
 interface Photo3Repository {
     fun getAll() : Flow<List<Photo3>>
 
+    suspend fun deleteAll()
+
     suspend fun insertPhoto3(photo3: Photo3)
 
     suspend fun deletePhoto3(photo3: Photo3)
+
+    suspend fun getRowCount() : Int
 }

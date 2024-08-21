@@ -3,9 +3,12 @@ package com.merfilom.myphotostories
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.merfilom.myphotostories.screens.AddNewPhotoScreen
+import com.merfilom.myphotostories.screens.EmptyNewPhotoStoryScreen
 import com.merfilom.myphotostories.screens.MainScreen
 import com.merfilom.myphotostories.screens.MenuScreen
 import com.merfilom.myphotostories.screens.NewPhotoStoryScreen
@@ -34,5 +37,6 @@ fun NavGraphNavigate(context : Context, navController: NavHostController) {
         composable("AddNewPhotoScreen"){
             AddNewPhotoScreen(navController = navController)
         }
+        composable("EmptyNewPhotoStoryScreen") { EmptyNewPhotoStoryScreen(navController) }
     }
 }

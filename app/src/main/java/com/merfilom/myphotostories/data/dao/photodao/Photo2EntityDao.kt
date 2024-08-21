@@ -17,5 +17,7 @@ interface Photo2EntityDao {
     suspend fun insertPhoto(photo2Entity: Photo2Entity)
     @Query("DELETE FROM photo2entity WHERE imageEntity = :image AND contentEntity = :content")
     suspend fun deletePhoto(image: String, content: String)
+    @Query("SELECT COUNT(*) FROM photo2entity")
+    suspend fun getRowCount(): Int
 
 }

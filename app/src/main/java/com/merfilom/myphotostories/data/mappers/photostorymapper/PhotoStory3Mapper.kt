@@ -8,9 +8,8 @@ import com.merfilom.myphotostories.domain.models.photomodels.Story3
 
 class PhotoStory3Mapper : PhotoStoryMapperInterface<Story3Entity, Story3> {
     override fun mapFromEntity(type: Story3Entity): Story3 {
-        return Story3(idStory3 = type.idStory3Entity,
+        return Story3(
             photoStory3 = Photo3(
-                title = type.photoStory3Entity.titleEntity,
                 content = type.photoStory3Entity.contentEntity,
                 image = type.photoStory3Entity.imageEntity
             )
@@ -18,9 +17,8 @@ class PhotoStory3Mapper : PhotoStoryMapperInterface<Story3Entity, Story3> {
     }
 
     override fun mapToEntity(type: Story3): Story3Entity {
-        return Story3Entity(idStory3Entity = type.idStory3,
+        return Story3Entity(
             photoStory3Entity = Photo3Entity(
-                titleEntity = type.photoStory3.title,
                 contentEntity = type.photoStory3.content,
                 imageEntity = type.photoStory3.image
             )

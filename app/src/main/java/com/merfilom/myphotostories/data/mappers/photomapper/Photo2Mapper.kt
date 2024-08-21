@@ -6,15 +6,13 @@ import com.merfilom.myphotostories.domain.models.photomodels.Photo2
 
 class Photo2Mapper : PhotoMapperInterface<Photo2Entity, Photo2> {
     override fun mapFromEntity(type: Photo2Entity): Photo2 {
-        return Photo2( id = type.idEntity,
-            title = type.titleEntity,
+        return Photo2(
             content = type.contentEntity,
             image = type.imageEntity,)
     }
 
     override fun mapToEntity(type: Photo2): Photo2Entity {
-        return Photo2Entity(idEntity = type.id,
-            titleEntity = type.title,
+        return Photo2Entity(
             contentEntity = type.content,
             imageEntity = type.image,)
     }

@@ -16,6 +16,7 @@ import com.merfilom.myphotostories.domain.models.photomodels.Story1
 import com.merfilom.myphotostories.domain.usecases.Delete1UseCase
 import com.merfilom.myphotostories.domain.usecases.DeleteAll1UseCase
 import com.merfilom.myphotostories.domain.usecases.GetAll1UseCase
+import com.merfilom.myphotostories.domain.usecases.GetRowCount1UseCase
 import com.merfilom.myphotostories.domain.usecases.Insert1UseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +35,8 @@ class Photo1ViewModel @Inject constructor(
     private val insert1UseCase: Insert1UseCase,
     private val delete1UseCase: Delete1UseCase,
     private val getAll1UseCase: GetAll1UseCase,
-    private val deleteAll1UseCase: DeleteAll1UseCase
+    private val deleteAll1UseCase: DeleteAll1UseCase,
+    private val getRowCount1UseCase: GetRowCount1UseCase
 ) : ViewModel() {
 
 
@@ -126,5 +128,9 @@ class Photo1ViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    suspend fun isTableEmpty(): Boolean {
+        return getRowCount1UseCase.photoExecute() == 0
     }
 }

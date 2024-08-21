@@ -30,4 +30,7 @@ class Photo2RepositoryImpl(private val photo2EntityDao: Photo2EntityDao) : Photo
         val entity = photo2Mapper.mapToEntity(photo2)
         photo2EntityDao.deletePhoto(entity.imageEntity, entity.contentEntity)
     }
+    override suspend fun getRowCount(): Int {
+        return photo2EntityDao.getRowCount()
+    }
 }

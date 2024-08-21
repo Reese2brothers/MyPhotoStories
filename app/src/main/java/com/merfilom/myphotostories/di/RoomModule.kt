@@ -7,11 +7,13 @@ import com.merfilom.myphotostories.data.dao.photodao.Photo2EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo3EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo4EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo5EntityDao
+import com.merfilom.myphotostories.data.dao.photodao.PhotoEmptyEntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Story1EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Story2EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Story3EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Story4EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Story5EntityDao
+import com.merfilom.myphotostories.data.dao.photodao.StoryEmptyEntityDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,6 +31,11 @@ class RoomModule {
         return AppDatabase.getDatabase(context = appContext)
     }
 
+    @Singleton
+    @Provides
+    fun providePhotoEmptyDao(roomDatabase : AppDatabase): PhotoEmptyEntityDao {
+        return roomDatabase.photoEmptyEntityDao()
+    }
     @Singleton
     @Provides
     fun providePhoto1Dao(roomDatabase : AppDatabase): Photo1EntityDao {
@@ -55,6 +62,11 @@ class RoomModule {
         return roomDatabase.photo5EntityDao()
     }
 
+    @Singleton
+    @Provides
+    fun provideStoryEmptyDao(roomDatabase : AppDatabase): StoryEmptyEntityDao {
+        return roomDatabase.storyEmptyEntityDao()
+    }
     @Singleton
     @Provides
     fun provideStory1Dao(roomDatabase : AppDatabase): Story1EntityDao {

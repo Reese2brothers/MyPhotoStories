@@ -2,6 +2,9 @@ package com.merfilom.myphotostories.screens
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.provider.OpenableColumns
 import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
@@ -21,6 +24,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -33,7 +37,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,31 +52,46 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.FileProvider
+import androidx.core.net.toFile
 import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import coil.memory.MemoryCache
+import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.merfilom.myphotostories.R
+import com.merfilom.myphotostories.domain.models.photomodels.Photo1
 import com.merfilom.myphotostories.domain.models.photomodels.Story1
 import com.merfilom.myphotostories.viewmodels.Photo1ViewModel
-import dagger.hilt.android.AndroidEntryPoint
-
-
+import com.merfilom.myphotostories.viewmodels.Photo2ViewModel
+import com.merfilom.myphotostories.viewmodels.Photo3ViewModel
+import com.merfilom.myphotostories.viewmodels.Photo4ViewModel
+import com.merfilom.myphotostories.viewmodels.Photo5ViewModel
+import com.merfilom.myphotostories.viewmodels.PhotoEmptyViewModel
+import java.io.File
 
 @Composable
-fun MainScreen(context : Context, navController: NavController){
-    val listState = rememberLazyListState()
+fun MainScreen(context : Context, navController: NavController) {
     val activity = LocalContext.current as? Activity
-    val viewModel: Photo1ViewModel = hiltViewModel()
-    val stories1 by viewModel.stories1.collectAsState(initial = emptyList())
+    val viewModel1: Photo1ViewModel = hiltViewModel()
+    val viewModel2: Photo2ViewModel = hiltViewModel()
+    val viewModel3: Photo3ViewModel = hiltViewModel()
+    val viewModel4: Photo4ViewModel = hiltViewModel()
+    val viewModel5: Photo5ViewModel = hiltViewModel()
+    val stories1 by viewModel1.stories1.collectAsState(initial = emptyList())
 
     BackHandler {
         activity?.finishAffinity()
     }
 
     LaunchedEffect(Unit) {
-        viewModel.getAll1NewPhotoStory()
+        viewModel1.getAll1NewPhotoStory()
+        viewModel2.getAll2NewPhotoStory()
+        viewModel3.getAll3NewPhotoStory()
+        viewModel4.getAll4NewPhotoStory()
+        viewModel5.getAll5NewPhotoStory()
     }
 
     Box(
@@ -81,7 +101,7 @@ fun MainScreen(context : Context, navController: NavController){
             Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Row (
+            Row(
                 Modifier
                     .fillMaxWidth()
                     .height(70.dp)
@@ -96,7 +116,7 @@ fun MainScreen(context : Context, navController: NavController){
                     ),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
-            ){
+            ) {
                 Card(
                     Modifier
                         .background(Color.Transparent)
@@ -110,44 +130,59 @@ fun MainScreen(context : Context, navController: NavController){
                         horizontalArrangement = Arrangement.SpaceEvenly,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Image(painter = painterResource(id = R.drawable.photo), contentDescription = "label",
-                            modifier = Modifier.size(60.dp))
-                        Text(text = "P&V Stories",  Modifier.padding(end = 8.dp),
+                        Image(
+                            painter = painterResource(id = R.drawable.photo),
+                            contentDescription = "label",
+                            modifier = Modifier.size(60.dp)
+                        )
+                        Text(
+                            text = "P&V Stories", Modifier.padding(end = 8.dp),
                             fontSize = 24.sp,
                             color = colorResource(id = R.color.black),
-                            fontWeight = FontWeight.Bold)
+                            fontWeight = FontWeight.Bold
+                        )
                     }
                 }
-                Row (
+                Row(
                     modifier = Modifier
                         .padding(end = 4.dp, bottom = 8.dp)
                         .wrapContentWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
-                ){
+                ) {
                     Column(
                         verticalArrangement = Arrangement.SpaceEvenly,
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.clickable { navController.navigate("MenuScreen") }
                     ) {
-                        Image(painter = painterResource(id = R.drawable.baseline_menu_24), contentDescription = "menu",
-                            modifier = Modifier.size(30.dp))
-                        Text(text = "menu",  Modifier.padding(start = 6.dp, end = 8.dp),
+                        Image(
+                            painter = painterResource(id = R.drawable.baseline_menu_24),
+                            contentDescription = "menu",
+                            modifier = Modifier.size(30.dp)
+                        )
+                        Text(
+                            text = "menu", Modifier.padding(start = 6.dp, end = 8.dp),
                             fontSize = 10.sp,
                             color = colorResource(id = R.color.black),
-                            fontWeight = FontWeight.Bold)
+                            fontWeight = FontWeight.Bold
+                        )
                     }
-                    Column (
+                    Column(
                         verticalArrangement = Arrangement.SpaceEvenly,
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.clickable { (context as Activity).finishAffinity() }
-                    ){
-                        Image(painter = painterResource(id = R.drawable.baseline_output_24), contentDescription = "exit",
-                        modifier = Modifier.size(30.dp))
-                        Text(text = "exit",  Modifier.padding(start = 6.dp, end = 8.dp),
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.baseline_output_24),
+                            contentDescription = "exit",
+                            modifier = Modifier.size(30.dp)
+                        )
+                        Text(
+                            text = "exit", Modifier.padding(start = 6.dp, end = 8.dp),
                             fontSize = 10.sp,
                             color = colorResource(id = R.color.black),
-                            fontWeight = FontWeight.Bold)
+                            fontWeight = FontWeight.Bold
+                        )
                     }
 
 
@@ -168,7 +203,7 @@ fun MainScreen(context : Context, navController: NavController){
                     shape = RoundedCornerShape(8.dp),
                     elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
                 ) {
-                    Column (
+                    Column(
                         Modifier
                             .wrapContentWidth()
                             .background(
@@ -179,42 +214,45 @@ fun MainScreen(context : Context, navController: NavController){
                                         colorResource(id = R.color.orange)
                                     )
                                 )
-                            )){
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(65.dp)
-                                    .background(
-                                        brush = Brush.verticalGradient(
-                                            colors = listOf(
-                                                colorResource(id = R.color.orange),
-                                                colorResource(id = R.color.white),
-                                                colorResource(id = R.color.orange)
-                                            )
+                            )
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(65.dp)
+                                .background(
+                                    brush = Brush.verticalGradient(
+                                        colors = listOf(
+                                            colorResource(id = R.color.orange),
+                                            colorResource(id = R.color.white),
+                                            colorResource(id = R.color.orange)
                                         )
-                                    ),
-                                horizontalArrangement = Arrangement.SpaceEvenly
-                            ){
-                                Image(painter = painterResource(id = R.drawable.fotik), contentDescription = "photo",
-                                    Modifier
-                                        .size(55.dp)
-                                        .padding(top = 8.dp))
-                                Text("Your\n      Photo\n           Stories",
-                                    Modifier.padding(top = 4.dp, end = 8.dp, bottom = 4.dp),
-                                    fontSize = 16.sp,
-                                    color = colorResource(id = R.color.black),
-                                    fontWeight = FontWeight.Bold,
-                                   )
-                            }
-                        LazyColumn(modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight(),
-                            //state = listState
-                            ) {
-                            item {
-                                AddNewPhotoStory(navController)
-                            }
-                            items(stories1) {  item ->
+                                    )
+                                ),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.fotik),
+                                contentDescription = "photo",
+                                Modifier
+                                    .size(55.dp)
+                                    .padding(top = 8.dp)
+                            )
+                            Text(
+                                "Your\n      Photo\n           Stories",
+                                Modifier.padding(top = 4.dp, end = 8.dp, bottom = 4.dp),
+                                fontSize = 16.sp,
+                                color = colorResource(id = R.color.black),
+                                fontWeight = FontWeight.Bold,
+                            )
+                        }
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(),
+                        ) {
+                            item { AddNewPhotoStory(navController) }
+                            itemsIndexed(stories1) { index, item ->
                                 Card(
                                     Modifier
                                         .fillMaxWidth()
@@ -223,7 +261,7 @@ fun MainScreen(context : Context, navController: NavController){
                                         .background(Color.Transparent),
                                     shape = RoundedCornerShape(8.dp),
                                     elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
-                                ){
+                                ) {
                                     Box(
                                         modifier = Modifier
                                             .fillMaxSize()
@@ -237,31 +275,40 @@ fun MainScreen(context : Context, navController: NavController){
                                                 )
                                             )
                                     ) {
-                                        Image(painter = painterResource(id = R.drawable.photofold), contentDescription = "photofold",
-                                            modifier = Modifier.fillMaxSize().padding(8.dp).graphicsLayer {
-                                                rotationY = -15f
-                                            }, contentScale = ContentScale.Crop)
-
-                                        val imageUri = item.photoStory1.image.toUri()
-                                        val targetPath = "content://com.merfilom.myphotostories.fileprovider/my_images/"
-                                        if (imageUri.toString().contains(targetPath)) {
-                                            val fileName = imageUri.toString().substringAfter("image=").substringBefore(".jpg") + ".jpg"
-                                            val fullUri = "$fileName".toUri()
-                                        AsyncImage(
-                                            model = ImageRequest.Builder(context)
-                                                .data(fullUri)
-                                                .crossfade(true)
-                                                .build(),
-                                            contentDescription = "item_photo",
-                                            modifier = Modifier.fillMaxSize().padding(top = 36.dp, start = 16.dp, end = 24.dp, bottom = 12.dp)
-                                                .graphicsLayer {
-                                                    rotationY = 15f
-                                                    rotationX = 15f
-                                            },
+                                        Image(
+                                            painter = painterResource(id = R.drawable.photofold),
+                                            contentDescription = "photofold",
+                                            modifier = Modifier
+                                                .fillMaxSize()
+                                                .padding(8.dp)
+                                                .graphicsLayer { rotationY = -15f },
                                             contentScale = ContentScale.Crop
                                         )
+                                        val imageUri = item.image.toUri()
+                                        val targetPath = "content://com.merfilom.myphotostories.fileprovider"
+                                        if (imageUri.toString().contains(targetPath)) {
+                                            val fileName = imageUri.toString().substringAfter("JPEG").substringBefore(".jpg") + ".jpg"
+                                            val fullUri = Uri.parse("$targetPath/my_images/transfered_images/JPEG$fileName")
+                                            AsyncImage(
+                                                model = ImageRequest.Builder(context).data(fullUri)
+                                                    .crossfade(true).build(),
+                                                contentDescription = "item_photo",
+                                                modifier = Modifier.fillMaxSize().padding(
+                                                    top = 36.dp,
+                                                    start = 16.dp,
+                                                    end = 24.dp,
+                                                    bottom = 12.dp
+                                                ).graphicsLayer {
+                                                    rotationY = 15f
+                                                    rotationX = 15f
+                                                },
+                                                contentScale = ContentScale.Crop
+                                            )
                                         } else {
-                                            Text("No image available", modifier = Modifier.fillMaxSize().padding(4.dp))
+                                            Text(
+                                                "No image available",
+                                                modifier = Modifier.fillMaxSize().padding(4.dp)
+                                            )
                                         }
                                     }
                                 }
@@ -277,46 +324,52 @@ fun MainScreen(context : Context, navController: NavController){
                     shape = RoundedCornerShape(8.dp),
                     elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
                 ) {
-                    Column (Modifier.background(
-                        brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                colorResource(id = R.color.orange),
-                                colorResource(id = R.color.white),
-                                colorResource(id = R.color.orange)
+                    Column(
+                        Modifier.background(
+                            brush = Brush.horizontalGradient(
+                                colors = listOf(
+                                    colorResource(id = R.color.orange),
+                                    colorResource(id = R.color.white),
+                                    colorResource(id = R.color.orange)
+                                )
                             )
                         )
-                    )){
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(65.dp)
-                                    .background(
-                                        brush = Brush.verticalGradient(
-                                            colors = listOf(
-                                                colorResource(id = R.color.orange),
-                                                colorResource(id = R.color.white),
-                                                colorResource(id = R.color.orange)
-                                            )
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(65.dp)
+                                .background(
+                                    brush = Brush.verticalGradient(
+                                        colors = listOf(
+                                            colorResource(id = R.color.orange),
+                                            colorResource(id = R.color.white),
+                                            colorResource(id = R.color.orange)
                                         )
-                                    ),
-                                horizontalArrangement = Arrangement.SpaceEvenly
-                            ){
-                                Image(painter = painterResource(id = R.drawable.plenka), contentDescription = "video",
-                                    Modifier
-                                        .size(60.dp)
-                                        .padding(top = 4.dp))
-                                Text("Your\n      Video\n           Stories",
-                                    Modifier.padding(top = 4.dp, end = 8.dp, bottom = 4.dp),
-                                    fontSize = 16.sp,
-                                    color = colorResource(id = R.color.black),
-                                    fontWeight = FontWeight.Bold,
-                                )
-                            }
-                        LazyColumn(modifier = Modifier.fillMaxSize(), state = listState) {
+                                    )
+                                ),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.plenka),
+                                contentDescription = "video",
+                                Modifier
+                                    .size(60.dp)
+                                    .padding(top = 4.dp)
+                            )
+                            Text(
+                                "Your\n      Video\n           Stories",
+                                Modifier.padding(top = 4.dp, end = 8.dp, bottom = 4.dp),
+                                fontSize = 16.sp,
+                                color = colorResource(id = R.color.black),
+                                fontWeight = FontWeight.Bold,
+                            )
+                        }
+                        LazyColumn(modifier = Modifier.fillMaxSize()) {
                             item {
                                 AddNewVideoStory(navController)
                             }
-                            items(0) {  item ->
+                            items(0) { item ->
                                 Card(
                                     Modifier
                                         .fillMaxWidth()
@@ -325,7 +378,7 @@ fun MainScreen(context : Context, navController: NavController){
                                         .background(Color.Transparent),
                                     shape = RoundedCornerShape(8.dp),
                                     elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
-                                ){
+                                ) {
 
                                 }
                             }
@@ -333,7 +386,7 @@ fun MainScreen(context : Context, navController: NavController){
                     }
                 }
             }
-            Row (
+            Row(
                 Modifier
                     .fillMaxWidth()
                     .height(20.dp)
@@ -345,7 +398,7 @@ fun MainScreen(context : Context, navController: NavController){
                             )
                         )
                     )
-            ){
+            ) {
 
             }
         }
@@ -363,7 +416,7 @@ Card (
     shape = RoundedCornerShape(8.dp),
     border = BorderStroke(1.dp, color = Color.Black),
     elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
-    onClick = {navController.navigate("NewPhotoStoryScreen")}
+    onClick = {navController.navigate("EmptyNewPhotoStoryScreen")}
 ){
 Column(
     verticalArrangement = Arrangement.SpaceEvenly,
@@ -390,7 +443,6 @@ Column(
 }
 }
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddNewVideoStory(navController: NavController){

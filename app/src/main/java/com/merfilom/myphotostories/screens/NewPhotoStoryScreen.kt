@@ -39,10 +39,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -65,7 +63,6 @@ import com.merfilom.myphotostories.R
 import com.merfilom.myphotostories.domain.models.photomodels.Photo1
 import com.merfilom.myphotostories.domain.models.photomodels.Story1
 import com.merfilom.myphotostories.viewmodels.Photo1ViewModel
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -149,9 +146,12 @@ Box(
                         shape = RoundedCornerShape(8.dp),
                         elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                         onClick = {
-                            bigPhoto.value = item.image.toUri()
-                            bigText.value = item.content
-                            currentIndex.value = index
+                            if(item.image.isNotEmpty()){
+                                bigPhoto.value = item.image.toUri()
+                                bigText.value = item.content
+                                currentIndex.value = index
+                            }
+
                         }
                     ){
                         Column(
@@ -297,7 +297,7 @@ Box(
                             bigPhoto.value = null
                             bigText.value = ""
                             showDialog.value = false
-                            viewModel.insertNewPhotoStory(story1 = Story1(photoStory1 = Photo1(content = photos1.toString(), image = photos1.toString())))
+                            //viewModel.insertNewPhotoStory(story1 = Story1(photoStory1 = Photo1(content = photos1.toString(), image = photos1.toString())))
                             navController.navigate("MainScreen")
                         }) {
                         Text("Yes", color = colorResource(id = R.color.orange), fontSize = 16.sp)
@@ -418,7 +418,7 @@ fun BottomButtons(modifier: Modifier, navController: NavController, deleteStory 
                 verticalArrangement = Arrangement.SpaceEvenly,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.clickable {
-                    viewModel.insertNewPhotoStory(story1 = Story1(photoStory1 = Photo1(content = photos1.toString(), image = photos1.toString())))
+                    //viewModel.insertNewPhotoStory(story1 = Story1(photoStory1 = Photo1(content = photos1.toString(), image = photos1.toString())))
                     navController.navigate("MainScreen")
                 }
             ){

@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.Flow
 interface Story3EntityDao {
     @Query("SELECT * FROM story3entity")
     fun getAll(): Flow<List<Story3Entity>>
+    @Query("DELETE FROM story3entity")
+    suspend fun deleteAll()
     @Insert
     suspend fun insertStory(story3Entity: Story3Entity)
     @Delete

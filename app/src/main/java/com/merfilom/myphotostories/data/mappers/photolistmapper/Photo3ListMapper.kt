@@ -11,8 +11,6 @@ class Photo3ListMapper: PhotoMapperInterface<List<Photo3Entity>, List<Photo3>> {
         type.forEach { photoEntity ->
             listPhoto.add(
                 Photo3(
-                    id = photoEntity.idEntity,
-                    title = photoEntity.titleEntity,
                     content = photoEntity.contentEntity,
                     image = photoEntity.imageEntity,
                 )
@@ -26,8 +24,6 @@ class Photo3ListMapper: PhotoMapperInterface<List<Photo3Entity>, List<Photo3>> {
         type.forEach { photo ->
             listPhotoEntity.add(
                 Photo3Entity(
-                    idEntity = photo.id,
-                    titleEntity = photo.title,
                     contentEntity = photo.content,
                     imageEntity = photo.image,
                 )

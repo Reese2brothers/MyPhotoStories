@@ -1,6 +1,5 @@
 package com.merfilom.myphotostories.data.mappers.photolistmapper
 
-import android.util.Log
 import com.merfilom.myphotostories.data.mappers.PhotoMapperInterface
 import com.merfilom.myphotostories.data.models.photomodels.Photo1Entity
 import com.merfilom.myphotostories.domain.models.photomodels.Photo1

@@ -12,4 +12,6 @@ interface Photo1Repository {
 
     suspend fun deletePhoto1(photo1: Photo1)
 
+    suspend fun getRowCount() : Int
+
 }
