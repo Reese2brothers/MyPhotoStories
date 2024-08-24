@@ -25,8 +25,14 @@ fun NavGraphNavigate(context : Context, navController: NavHostController) {
         composable("MainScreen"){
             MainScreen(context, navController = navController)
         }
-        composable("NewPhotoStoryScreen"){
-            NewPhotoStoryScreen(navController = navController)
+//        composable("NewPhotoStoryScreen"){
+//            NewPhotoStoryScreen(navController = navController)
+//        }
+        composable("NewPhotoStoryScreen/{photoKey}",
+            arguments = listOf(navArgument("photoKey") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val photoKey = backStackEntry.arguments?.getInt("photoKey") ?: 0
+            NewPhotoStoryScreen(navController, photoKey)
         }
         composable("NewVideoStoryScreen"){
             NewVideoStoryScreen(navController = navController)

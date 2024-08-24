@@ -5,7 +5,7 @@ data class StoryEmpty(
     val photoStoryEmpty: PhotoEmpty
 )
 data class Story1(
-    //val photoStory1: Photo1
+    //var id: Int,
     val image : String
 )
 

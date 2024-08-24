@@ -1,5 +1,6 @@
 package com.merfilom.myphotostories.screens
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.graphics.BitmapFactory
@@ -72,6 +73,8 @@ import com.merfilom.myphotostories.viewmodels.Photo5ViewModel
 import com.merfilom.myphotostories.viewmodels.PhotoEmptyViewModel
 import java.io.File
 
+@SuppressLint("SuspiciousIndentation")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(context : Context, navController: NavController) {
     val activity = LocalContext.current as? Activity
@@ -253,14 +256,39 @@ fun MainScreen(context : Context, navController: NavController) {
                         ) {
                             item { AddNewPhotoStory(navController) }
                             itemsIndexed(stories1) { index, item ->
+                                Log.d("TAG", "[index]: ${index}")
                                 Card(
-                                    Modifier
-                                        .fillMaxWidth()
-                                        .height(150.dp)
-                                        .padding(4.dp)
-                                        .background(Color.Transparent),
+                                    modifier = Modifier.fillMaxWidth().height(150.dp).padding(4.dp).background(Color.Transparent),
                                     shape = RoundedCornerShape(8.dp),
-                                    elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
+                                    elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
+                                    onClick = {
+                                        if(index == 0){
+                                            navController.navigate("NewPhotoStoryScreen/${1}")
+                                            //Log.d("TAG", "stories1[index].id: ${stories1[index].id}")
+                                        }
+                                        if(index == 1){
+                                            navController.navigate("NewPhotoStoryScreen/${2}")
+                                            //Log.d("TAG", "stories1[index].id: ${stories1[index].id}")
+                                        }
+                                        if(index == 2){
+                                            navController.navigate("NewPhotoStoryScreen/${3}")
+                                            //Log.d("TAG", "stories1[index].id: ${stories1[index].id}")
+                                        }
+                                        if(index == 3){
+                                            navController.navigate("NewPhotoStoryScreen/${4}")
+                                            //Log.d("TAG", "stories1[index].id: ${stories1[index].id}")
+                                        }
+                                        if(index == 4){
+                                            navController.navigate("NewPhotoStoryScreen/${5}")
+                                            //Log.d("TAG", "stories1[index].id: ${stories1[index].id}")
+                                        }
+
+
+//                                        if (item.image.isNotEmpty()) {
+//                                            navController.navigate("NewPhotoStoryScreen/${item.id}")
+//                                            Log.d("TAG", "item.id: ${item.id}")
+//                                        }
+                                    }
                                 ) {
                                     Box(
                                         modifier = Modifier
@@ -284,12 +312,12 @@ fun MainScreen(context : Context, navController: NavController) {
                                                 .graphicsLayer { rotationY = -15f },
                                             contentScale = ContentScale.Crop
                                         )
-                                        val imageUri = item.image.toUri()
-                                        val targetPath = "content://com.merfilom.myphotostories.fileprovider"
+                                            val imageUri = item.image.toUri()
+                                            val targetPath = "content://com.merfilom.myphotostories.fileprovider"
                                         if (imageUri.toString().contains(targetPath)) {
                                             val fileName = imageUri.toString().substringAfter("JPEG").substringBefore(".jpg") + ".jpg"
                                             val fullUri = Uri.parse("$targetPath/my_images/transfered_images/JPEG$fileName")
-                                            AsyncImage(
+                                                AsyncImage(
                                                 model = ImageRequest.Builder(context).data(fullUri)
                                                     .crossfade(true).build(),
                                                 contentDescription = "item_photo",

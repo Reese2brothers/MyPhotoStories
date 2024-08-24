@@ -13,6 +13,7 @@ import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStory4Rep
 import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStory5Repository
 import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStoryEmptyRepository
 import com.merfilom.myphotostories.domain.usecases.CopyIntoUseCase
+import com.merfilom.myphotostories.domain.usecases.DecrementAllStory1IdsUseCase
 import com.merfilom.myphotostories.domain.usecases.Delete1UseCase
 import com.merfilom.myphotostories.domain.usecases.Delete2UseCase
 import com.merfilom.myphotostories.domain.usecases.Delete3UseCase
@@ -25,6 +26,7 @@ import com.merfilom.myphotostories.domain.usecases.DeleteAll4UseCase
 import com.merfilom.myphotostories.domain.usecases.DeleteAll5UseCase
 import com.merfilom.myphotostories.domain.usecases.DeleteAllEmptyUseCase
 import com.merfilom.myphotostories.domain.usecases.DeleteEmptyUseCase
+import com.merfilom.myphotostories.domain.usecases.DeleteStoryByIdUseCase
 import com.merfilom.myphotostories.domain.usecases.GetAll1UseCase
 import com.merfilom.myphotostories.domain.usecases.GetAll2UseCase
 import com.merfilom.myphotostories.domain.usecases.GetAll3UseCase
@@ -54,6 +56,14 @@ object DomainModule {
     @Provides
     fun provideDeleteEmptyUseCase(photoEmptyRepository: PhotoEmptyRepository, storyEmptyRepository: PhotoStoryEmptyRepository): DeleteEmptyUseCase {
         return  DeleteEmptyUseCase(photoEmptyRepository = photoEmptyRepository, storyEmptyRepository = storyEmptyRepository)
+    }
+    @Provides
+    fun provideDeleteStoryByIdUseCase(story1Repository: PhotoStory1Repository): DeleteStoryByIdUseCase {
+        return  DeleteStoryByIdUseCase(story1Repository = story1Repository)
+    }
+    @Provides
+    fun provideDecrementAllStory1IdsUseCase(story1Repository: PhotoStory1Repository): DecrementAllStory1IdsUseCase {
+        return DecrementAllStory1IdsUseCase(story1Repository = story1Repository)
     }
     @Provides
     fun provideDelete1UseCase(photo1Repository: Photo1Repository, story1Repository: PhotoStory1Repository): Delete1UseCase {

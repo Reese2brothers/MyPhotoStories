@@ -8,7 +8,6 @@ import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.merfilom.myphotostories.domain.models.photomodels.PhotoEmpty
-import com.merfilom.myphotostories.domain.models.photomodels.Story1
 import com.merfilom.myphotostories.domain.models.photomodels.StoryEmpty
 import com.merfilom.myphotostories.domain.usecases.CopyIntoUseCase
 import com.merfilom.myphotostories.domain.usecases.DeleteAllEmptyUseCase
