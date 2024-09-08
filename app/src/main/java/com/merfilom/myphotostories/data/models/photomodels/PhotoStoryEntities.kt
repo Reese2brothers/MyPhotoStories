@@ -16,6 +16,7 @@ data class StoryEmptyEntity(
 data class Story1Entity(
     @PrimaryKey(autoGenerate = true)
     var idStory1Entity: Int = 0,
+    val idNameEntity : String,
     val imageEntity : String
 )
 

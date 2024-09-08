@@ -11,8 +11,8 @@ interface PhotoStory1Repository {
     suspend fun insertStory1(story1: Story1)
 
     suspend fun deleteStory1(story1: Story1)
-    suspend fun deleteStoryById(storyId: Int)
+    suspend fun deleteStoryById(storyId: String)
     suspend fun decrementAllStory1Ids()
-    suspend fun decrementIdsAfterDeleted(deletedId: Int)
+    suspend fun decrementIdsAfterDeleted(deletedId: String)
 
 }

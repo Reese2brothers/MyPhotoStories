@@ -117,7 +117,8 @@ class PhotoEmptyViewModel @Inject constructor(
                 }
                 deleteAllEmptyUseCase.photoExecute()
                 viewModelScope.launch(Dispatchers.Main) {
-                    Toast.makeText(context, "All photos deleted successfully!", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(context, "All photos deleted successfully!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Successfully!", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 viewModelScope.launch(Dispatchers.Main) {

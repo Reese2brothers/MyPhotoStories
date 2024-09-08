@@ -54,7 +54,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -63,9 +62,6 @@ import coil.request.ImageRequest
 import com.merfilom.myphotostories.R
 import com.merfilom.myphotostories.domain.models.photomodels.PhotoEmpty
 import com.merfilom.myphotostories.domain.models.photomodels.Story1
-import com.merfilom.myphotostories.domain.models.photomodels.Story3
-import com.merfilom.myphotostories.domain.models.photomodels.Story4
-import com.merfilom.myphotostories.domain.models.photomodels.Story5
 import com.merfilom.myphotostories.domain.models.photomodels.StoryEmpty
 import com.merfilom.myphotostories.viewmodels.Photo1ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo2ViewModel
@@ -73,14 +69,7 @@ import com.merfilom.myphotostories.viewmodels.Photo3ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo4ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo5ViewModel
 import com.merfilom.myphotostories.viewmodels.PhotoEmptyViewModel
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
-import java.io.File
-import java.io.FileOutputStream
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -449,27 +438,27 @@ fun EmptyBottomButtons(modifier: Modifier, navController: NavController, deleteS
                     scope.launch {
                         when {
                             viewModel1.isTableEmpty() -> {
-                                viewModel1.insertNewPhotoStory(story1 = Story1(image = photosEmpty.toString()))
+                                viewModel1.insertNewPhotoStory(story1 = Story1(image = photosEmpty.toString(), idName = "pfirst"))
                                 viewModel.copyInto1(context)
                                 viewModel.deleteAllEmptyPhoto(context = context)
                             }
                             viewModel2.isTableEmpty() -> {
-                                viewModel1.insertNewPhotoStory(story1 = Story1(image = photosEmpty.toString()))
+                                viewModel1.insertNewPhotoStory(story1 = Story1(image = photosEmpty.toString(), idName = "psecond"))
                                 viewModel.copyInto2(context)
                                 viewModel.deleteAllEmptyPhoto(context = context)
                             }
                             viewModel3.isTableEmpty() -> {
-                                viewModel1.insertNewPhotoStory(story1 = Story1(image = photosEmpty.toString()))
+                                viewModel1.insertNewPhotoStory(story1 = Story1(image = photosEmpty.toString(), idName = "pthird"))
                                 viewModel.copyInto3(context)
                                 viewModel.deleteAllEmptyPhoto(context = context)
                             }
                             viewModel4.isTableEmpty() -> {
-                                viewModel1.insertNewPhotoStory(story1 = Story1(image = photosEmpty.toString()))
+                                viewModel1.insertNewPhotoStory(story1 = Story1(image = photosEmpty.toString(), idName = "pfourth"))
                                 viewModel.copyInto4(context)
                                 viewModel.deleteAllEmptyPhoto(context = context)
                             }
                             viewModel5.isTableEmpty() -> {
-                                viewModel1.insertNewPhotoStory(story1 = Story1(image = photosEmpty.toString()))
+                                viewModel1.insertNewPhotoStory(story1 = Story1(image = photosEmpty.toString(), idName = "pfifth"))
                                 viewModel.copyInto5(context)
                                 viewModel.deleteAllEmptyPhoto(context = context)
                             }

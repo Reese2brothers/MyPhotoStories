@@ -64,6 +64,10 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.merfilom.myphotostories.R
 import com.merfilom.myphotostories.domain.models.photomodels.Photo1
+import com.merfilom.myphotostories.domain.models.photomodels.Photo2
+import com.merfilom.myphotostories.domain.models.photomodels.Photo3
+import com.merfilom.myphotostories.domain.models.photomodels.Photo4
+import com.merfilom.myphotostories.domain.models.photomodels.Photo5
 import com.merfilom.myphotostories.domain.models.photomodels.PhotoEmpty
 import com.merfilom.myphotostories.viewmodels.Photo1ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo2ViewModel
@@ -79,7 +83,7 @@ import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
-fun AddNewPhotoScreen(navController: NavController){
+fun KeyAddNewPhotoScreen(navController: NavController, keyPhoto : String){
     val currentText = rememberSaveable { mutableStateOf("") }
     val context = LocalContext.current
     var selectedImageUri by rememberSaveable { mutableStateOf<Uri?>(null) }
@@ -95,13 +99,13 @@ fun AddNewPhotoScreen(navController: NavController){
     val photoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
         onResult = { uri ->
-            uri?.let { selectedImageUri = saveImageToFile(context, it) }
+            uri?.let { selectedImageUri = keySaveImageToFile(context, it) }
         }
     )
     val legacyPhotoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
         onResult = { uri ->
-            uri?.let { selectedImageUri = saveImageToFile(context, it) }
+            uri?.let { selectedImageUri = keySaveImageToFile(context, it) }
         }
     )
     val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -123,127 +127,131 @@ fun AddNewPhotoScreen(navController: NavController){
     }
 
     if (permissionState.allPermissionsGranted) {
-    Box(
-        Modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.horizontalGradient(
-                    colors = listOf(
-                        colorResource(id = R.color.orange),
-                        colorResource(id = R.color.white),
-                        colorResource(id = R.color.orange)
+        Box(
+            Modifier
+                .fillMaxSize()
+                .background(
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(
+                            colorResource(id = R.color.orange),
+                            colorResource(id = R.color.white),
+                            colorResource(id = R.color.orange)
+                        )
                     )
                 )
-            )
-    ){
-        Column(
-            verticalArrangement = Arrangement.SpaceEvenly,
-            horizontalAlignment = Alignment.CenterHorizontally
         ){
-            Card(
-                Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .background(Color.Transparent)
-                    .padding(4.dp),
-                shape = RoundedCornerShape(8.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
-            ) {
-                bitmap?.let {
-                    val highQualityBitmap = it.copy(Bitmap.Config.ARGB_8888, true)
-                    highQualityBitmap.prepareToDraw()
-                    Image(
-                        bitmap = highQualityBitmap?.asImageBitmap()!!,
-                        contentDescription = "cameraBitmap",
-                        modifier = Modifier.fillMaxSize(),
-                        contentScale = ContentScale.Crop
-                    )
-                }
-                selectedImageUri?.let { uri ->
-                    AsyncImage(
-                        model = ImageRequest.Builder(context)
-                            .data(uri)
-                            .crossfade(true)
-                            .build(),
-                        contentDescription = "item_photo",
-                        modifier = Modifier.fillMaxSize(),
-                        contentScale = ContentScale.Crop
-                    )
-               } ?: run {
-                    Image(
-                        painter = painterResource(id = R.drawable.photo),
-                        contentDescription = "newphoto",
-                        Modifier
-                            .fillMaxSize()
-                            .background(
-                                brush = Brush.verticalGradient(
-                                    colors = listOf(
-                                        colorResource(id = R.color.orange),
-                                        colorResource(id = R.color.white),
-                                        colorResource(id = R.color.orange)
+            Column(
+                verticalArrangement = Arrangement.SpaceEvenly,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ){
+                Card(
+                    Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .background(Color.Transparent)
+                        .padding(4.dp),
+                    shape = RoundedCornerShape(8.dp),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
+                ) {
+                    bitmap?.let {
+                        val highQualityBitmap = it.copy(Bitmap.Config.ARGB_8888, true)
+                        highQualityBitmap.prepareToDraw()
+                        Image(
+                            bitmap = highQualityBitmap?.asImageBitmap()!!,
+                            contentDescription = "cameraBitmap",
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Crop
+                        )
+                    }
+                    selectedImageUri?.let { uri ->
+                        AsyncImage(
+                            model = ImageRequest.Builder(context)
+                                .data(uri)
+                                .crossfade(true)
+                                .build(),
+                            contentDescription = "item_photo",
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Crop
+                        )
+                    } ?: run {
+                        Image(
+                            painter = painterResource(id = R.drawable.photo),
+                            contentDescription = "newphoto",
+                            Modifier
+                                .fillMaxSize()
+                                .background(
+                                    brush = Brush.verticalGradient(
+                                        colors = listOf(
+                                            colorResource(id = R.color.orange),
+                                            colorResource(id = R.color.white),
+                                            colorResource(id = R.color.orange)
+                                        )
                                     )
                                 )
-                            )
-                    )
+                        )
+                    }
                 }
-            }
-            TextField(
-                colors = TextFieldDefaults.textFieldColors(
-                    containerColor = colorResource(id = R.color.orange),
-                    cursorColor = colorResource(id = R.color.black),
-                    unfocusedIndicatorColor = colorResource(id = R.color.black),
-                    focusedIndicatorColor = colorResource(id = R.color.black),
-                    textColor = colorResource(id = R.color.black)
-                ),
-                value = currentText.value, onValueChange = { newValue ->
-                    currentText.value = newValue
-                },
-                keyboardActions = KeyboardActions(onDone = {
+                TextField(
+                    colors = TextFieldDefaults.textFieldColors(
+                        containerColor = colorResource(id = R.color.orange),
+                        cursorColor = colorResource(id = R.color.black),
+                        unfocusedIndicatorColor = colorResource(id = R.color.black),
+                        focusedIndicatorColor = colorResource(id = R.color.black),
+                        textColor = colorResource(id = R.color.black)
+                    ),
+                    value = currentText.value, onValueChange = { newValue ->
+                        currentText.value = newValue
+                    },
+                    keyboardActions = KeyboardActions(onDone = {
 
-                }),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(start = 4.dp, end = 4.dp),
-                textStyle = TextStyle(fontSize = 20.sp),
-                trailingIcon = {
-                    Icon(imageVector = Icons.Default.Clear, contentDescription = "clear",
-                        modifier = Modifier.clickable { currentText.value = "" })
-                },
-                placeholder = {
-                    Text(text = "Enter a description of the photo...", fontSize = 14.sp,)
-                }
+                    }),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .padding(start = 4.dp, end = 4.dp),
+                    textStyle = TextStyle(fontSize = 20.sp),
+                    trailingIcon = {
+                        Icon(imageVector = Icons.Default.Clear, contentDescription = "clear",
+                            modifier = Modifier.clickable { currentText.value = "" })
+                    },
+                    placeholder = {
+                        Text(text = "Enter a description of the photo...", fontSize = 14.sp,)
+                    }
                 )
-            MovePanel ({
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    photoPickerLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-                } else {
-                    legacyPhotoPickerLauncher.launch("image/*")
-                }
-            }, { val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
-                val storageDir: File = context.getExternalFilesDir(null)!!
-                val photoFile = File.createTempFile(
-                    "JPEG_${timeStamp}_",
-                    ".jpg",
-                    storageDir
-                )
-                val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", photoFile)
-                selectedImageUri = uri
-                cameraLauncher.launch(uri)},
-                {selectedImageUri = null
-                bitmap = null}, currentText.value, selectedImageUri, navController)
+                KeyMovePanel ({
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        photoPickerLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                    } else {
+                        legacyPhotoPickerLauncher.launch("image/*")
+                    }
+                }, { val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
+                    val storageDir: File = context.getExternalFilesDir(null)!!
+                    val photoFile = File.createTempFile(
+                        "JPEG_${timeStamp}_",
+                        ".jpg",
+                        storageDir
+                    )
+                    val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", photoFile)
+                    selectedImageUri = uri
+                    cameraLauncher.launch(uri)},
+                    {selectedImageUri = null
+                        bitmap = null}, currentText.value, selectedImageUri, navController, keyPhoto)
+            }
         }
-    }
     } else {
         //Toast.makeText(context, "Permissions are required to display photos!", Toast.LENGTH_SHORT).show()
     }
 }
 
 @Composable
-fun MovePanel(launchPhotoPicker: () -> Unit, launchPhotoCameraPicker: () -> Unit, deleteBigPhoto: () -> Unit,
-              currentText : String, selectedImageUri : Uri?, navController: NavController
+fun KeyMovePanel(launchPhotoPicker: () -> Unit, launchPhotoCameraPicker: () -> Unit, deleteBigPhoto: () -> Unit,
+              currentText : String, selectedImageUri : Uri?, navController: NavController, keyPhoto : String
 ) {
-    val viewModel: PhotoEmptyViewModel = hiltViewModel()
+    val viewModel1: Photo1ViewModel = hiltViewModel()
+    val viewModel2: Photo2ViewModel = hiltViewModel()
+    val viewModel3: Photo3ViewModel = hiltViewModel()
+    val viewModel4: Photo4ViewModel = hiltViewModel()
+    val viewModel5: Photo5ViewModel = hiltViewModel()
 
     Card(
         Modifier
@@ -309,9 +317,26 @@ fun MovePanel(launchPhotoPicker: () -> Unit, launchPhotoCameraPicker: () -> Unit
                 verticalArrangement = Arrangement.SpaceEvenly,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.clickable {
-                    val photoEmpty = PhotoEmpty(content = currentText, image = selectedImageUri.toString())
-                    viewModel.insertNewPhoto(photoEmpty = photoEmpty)
-                    navController.navigate("EmptyNewPhotoStoryScreen")
+                    if(keyPhoto == "pfirst"){
+                        viewModel1.insertNewPhoto(photo1 = Photo1(content = currentText, image = selectedImageUri.toString()))
+                        navController.navigate("NewPhotoStoryScreen/pfirst")
+                    }
+                    if(keyPhoto == "psecond"){
+                        viewModel2.insertNewPhoto(photo2 = Photo2(content = currentText, image = selectedImageUri.toString()))
+                        navController.navigate("NewPhotoStoryScreen/psecond")
+                    }
+                    if(keyPhoto == "pthird"){
+                        viewModel3.insertNewPhoto(photo3 = Photo3(content = currentText, image = selectedImageUri.toString()))
+                        navController.navigate("NewPhotoStoryScreen/pthird")
+                    }
+                    if(keyPhoto == "pfourth"){
+                        viewModel4.insertNewPhoto(photo4 = Photo4(content = currentText, image = selectedImageUri.toString()))
+                        navController.navigate("NewPhotoStoryScreen/pfourth")
+                    }
+                    if(keyPhoto == "pfifth"){
+                        viewModel5.insertNewPhoto(photo5 = Photo5(content = currentText, image = selectedImageUri.toString()))
+                        navController.navigate("NewPhotoStoryScreen/pfifth")
+                    }
                 }
             ){
                 Image(painter = painterResource(id = R.drawable.baseline_save_24), contentDescription = "savePhoto", modifier = Modifier.size(25.dp))
@@ -324,10 +349,10 @@ fun MovePanel(launchPhotoPicker: () -> Unit, launchPhotoCameraPicker: () -> Unit
     }
 }
 
-fun saveImageToFile(context: Context, uri: Uri): Uri {
+fun keySaveImageToFile(context: Context, uri: Uri): Uri {
     val inputStream = context.contentResolver.openInputStream(uri)
     val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
-    val storageDir: File = File(context.getExternalFilesDir(null), "images")
+    val storageDir: File = File(context.getExternalFilesDir(null), "transfered_images")
     if (!storageDir.exists()) {
         storageDir.mkdirs()
     }

@@ -3,9 +3,7 @@ package com.merfilom.myphotostories.screens
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.graphics.BitmapFactory
 import android.net.Uri
-import android.provider.OpenableColumns
 import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
@@ -24,9 +22,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -38,9 +34,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -53,25 +46,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.FileProvider
-import androidx.core.net.toFile
 import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import coil.memory.MemoryCache
-import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.merfilom.myphotostories.R
-import com.merfilom.myphotostories.domain.models.photomodels.Photo1
-import com.merfilom.myphotostories.domain.models.photomodels.Story1
 import com.merfilom.myphotostories.viewmodels.Photo1ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo2ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo3ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo4ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo5ViewModel
-import com.merfilom.myphotostories.viewmodels.PhotoEmptyViewModel
-import java.io.File
 
 @SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -256,38 +241,26 @@ fun MainScreen(context : Context, navController: NavController) {
                         ) {
                             item { AddNewPhotoStory(navController) }
                             itemsIndexed(stories1) { index, item ->
-                                Log.d("TAG", "[index]: ${index}")
                                 Card(
                                     modifier = Modifier.fillMaxWidth().height(150.dp).padding(4.dp).background(Color.Transparent),
                                     shape = RoundedCornerShape(8.dp),
                                     elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                     onClick = {
-                                        if(index == 0){
-                                            navController.navigate("NewPhotoStoryScreen/${1}")
-                                            //Log.d("TAG", "stories1[index].id: ${stories1[index].id}")
+                                        if (item.toString().contains("pfirst")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfirst")
                                         }
-                                        if(index == 1){
-                                            navController.navigate("NewPhotoStoryScreen/${2}")
-                                            //Log.d("TAG", "stories1[index].id: ${stories1[index].id}")
+                                        if(item.toString().contains("psecond")){
+                                            navController.navigate("NewPhotoStoryScreen/psecond")
                                         }
-                                        if(index == 2){
-                                            navController.navigate("NewPhotoStoryScreen/${3}")
-                                            //Log.d("TAG", "stories1[index].id: ${stories1[index].id}")
+                                        if(item.toString().contains("pthird")){
+                                            navController.navigate("NewPhotoStoryScreen/pthird")
                                         }
-                                        if(index == 3){
-                                            navController.navigate("NewPhotoStoryScreen/${4}")
-                                            //Log.d("TAG", "stories1[index].id: ${stories1[index].id}")
+                                        if(item.toString().contains("pfourth")){
+                                            navController.navigate("NewPhotoStoryScreen/pfourth")
                                         }
-                                        if(index == 4){
-                                            navController.navigate("NewPhotoStoryScreen/${5}")
-                                            //Log.d("TAG", "stories1[index].id: ${stories1[index].id}")
+                                        if(item.toString().contains("pfifth")){
+                                            navController.navigate("NewPhotoStoryScreen/pfifth")
                                         }
-
-
-//                                        if (item.image.isNotEmpty()) {
-//                                            navController.navigate("NewPhotoStoryScreen/${item.id}")
-//                                            Log.d("TAG", "item.id: ${item.id}")
-//                                        }
                                     }
                                 ) {
                                     Box(
