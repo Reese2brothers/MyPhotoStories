@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -53,10 +52,6 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.merfilom.myphotostories.R
 import com.merfilom.myphotostories.viewmodels.Photo1ViewModel
-import com.merfilom.myphotostories.viewmodels.Photo2ViewModel
-import com.merfilom.myphotostories.viewmodels.Photo3ViewModel
-import com.merfilom.myphotostories.viewmodels.Photo4ViewModel
-import com.merfilom.myphotostories.viewmodels.Photo5ViewModel
 
 @SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -64,10 +59,6 @@ import com.merfilom.myphotostories.viewmodels.Photo5ViewModel
 fun MainScreen(context : Context, navController: NavController) {
     val activity = LocalContext.current as? Activity
     val viewModel1: Photo1ViewModel = hiltViewModel()
-    val viewModel2: Photo2ViewModel = hiltViewModel()
-    val viewModel3: Photo3ViewModel = hiltViewModel()
-    val viewModel4: Photo4ViewModel = hiltViewModel()
-    val viewModel5: Photo5ViewModel = hiltViewModel()
     val stories1 by viewModel1.stories1.collectAsState(initial = emptyList())
 
     BackHandler {
@@ -76,10 +67,6 @@ fun MainScreen(context : Context, navController: NavController) {
 
     LaunchedEffect(Unit) {
         viewModel1.getAll1NewPhotoStory()
-        viewModel2.getAll2NewPhotoStory()
-        viewModel3.getAll3NewPhotoStory()
-        viewModel4.getAll4NewPhotoStory()
-        viewModel5.getAll5NewPhotoStory()
     }
 
     Box(
@@ -242,7 +229,11 @@ fun MainScreen(context : Context, navController: NavController) {
                             item { AddNewPhotoStory(navController) }
                             itemsIndexed(stories1) { index, item ->
                                 Card(
-                                    modifier = Modifier.fillMaxWidth().height(150.dp).padding(4.dp).background(Color.Transparent),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(160.dp)
+                                        .padding(4.dp)
+                                        .background(Color.Transparent),
                                     shape = RoundedCornerShape(8.dp),
                                     elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                     onClick = {
@@ -276,6 +267,18 @@ fun MainScreen(context : Context, navController: NavController) {
                                                 )
                                             )
                                     ) {
+                                        Row(
+                                            modifier = Modifier.fillMaxWidth(),
+                                            horizontalArrangement = Arrangement.End,
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ) {
+                                            Text(
+                                                text = "${index + 1}/100",
+                                                modifier = Modifier.padding(end = 4.dp),
+                                                fontSize = 12.sp,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        }
                                         Image(
                                             painter = painterResource(id = R.drawable.photofold),
                                             contentDescription = "photofold",
@@ -294,21 +297,26 @@ fun MainScreen(context : Context, navController: NavController) {
                                                 model = ImageRequest.Builder(context).data(fullUri)
                                                     .crossfade(true).build(),
                                                 contentDescription = "item_photo",
-                                                modifier = Modifier.fillMaxSize().padding(
-                                                    top = 36.dp,
-                                                    start = 16.dp,
-                                                    end = 24.dp,
-                                                    bottom = 12.dp
-                                                ).graphicsLayer {
-                                                    rotationY = 15f
-                                                    rotationX = 15f
-                                                },
+                                                modifier = Modifier
+                                                    .fillMaxSize()
+                                                    .padding(
+                                                        top = 36.dp,
+                                                        start = 16.dp,
+                                                        end = 24.dp,
+                                                        bottom = 12.dp
+                                                    )
+                                                    .graphicsLayer {
+                                                        rotationY = 15f
+                                                        rotationX = 15f
+                                                    },
                                                 contentScale = ContentScale.Crop
                                             )
                                         } else {
                                             Text(
                                                 "No image available",
-                                                modifier = Modifier.fillMaxSize().padding(4.dp)
+                                                modifier = Modifier
+                                                    .fillMaxSize()
+                                                    .padding(4.dp)
                                             )
                                         }
                                     }

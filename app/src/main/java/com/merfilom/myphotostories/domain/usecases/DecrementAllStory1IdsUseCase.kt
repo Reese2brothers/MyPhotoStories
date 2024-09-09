@@ -8,7 +8,4 @@ class DecrementAllStory1IdsUseCase(
     suspend fun storyExecute(){
         return  story1Repository.decrementAllStory1Ids()
     }
-    suspend fun decrementIdsAfterDeleted(deletedId: String){
-        return story1Repository.decrementIdsAfterDeleted(deletedId)
-    }
 }

@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.merfilom.myphotostories.domain.models.photomodels.Photo2
-import com.merfilom.myphotostories.domain.models.photomodels.Story2
 import com.merfilom.myphotostories.domain.usecases.Delete2UseCase
 import com.merfilom.myphotostories.domain.usecases.DeleteAll2UseCase
 import com.merfilom.myphotostories.domain.usecases.GetAll2UseCase
@@ -33,9 +32,6 @@ class Photo2ViewModel @Inject constructor(
     private val _photos2 = MutableStateFlow<List<Photo2>>(emptyList())
     val photos2: StateFlow<List<Photo2>> = _photos2
 
-    private val _stories2 = MutableStateFlow<List<Story2>>(emptyList())
-    val stories2: StateFlow<List<Story2>> = _stories2
-
     init {
         viewModelScope.launch {
             getAll2UseCase.photoExecute().collect { photoList ->
@@ -46,12 +42,6 @@ class Photo2ViewModel @Inject constructor(
     fun insertNewPhoto(photo2: Photo2) {
         viewModelScope.launch(Dispatchers.IO) {
             insert2UseCase.photoExecute(photo2)
-        }
-    }
-
-    fun insertNewPhotoStory(story2: Story2) {
-        viewModelScope.launch(Dispatchers.IO) {
-            insert2UseCase.storyExecute(story2)
         }
     }
     fun deleteNewPhoto(photo2 : Photo2, context : Context){
@@ -78,11 +68,6 @@ class Photo2ViewModel @Inject constructor(
             }
         }
     }
-    fun deleteNewPhotoStory(story2 : Story2){
-        viewModelScope.launch(Dispatchers.IO) {
-            delete2UseCase.storyExecute(story2)
-        }
-    }
     fun getAll2NewPhoto(): List<Photo2>  {
         var photoList = emptyList<Photo2>()
         viewModelScope.launch {
@@ -91,13 +76,6 @@ class Photo2ViewModel @Inject constructor(
             }
         }
         return photoList
-    }
-    fun getAll2NewPhotoStory() {
-        viewModelScope.launch {
-            getAll2UseCase.storyExecute().collect { storyList ->
-                _stories2.value = storyList
-            }
-        }
     }
     fun deleteAll2Photo(context : Context) {
         viewModelScope.launch {

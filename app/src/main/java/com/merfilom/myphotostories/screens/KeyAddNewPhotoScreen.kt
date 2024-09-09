@@ -68,13 +68,11 @@ import com.merfilom.myphotostories.domain.models.photomodels.Photo2
 import com.merfilom.myphotostories.domain.models.photomodels.Photo3
 import com.merfilom.myphotostories.domain.models.photomodels.Photo4
 import com.merfilom.myphotostories.domain.models.photomodels.Photo5
-import com.merfilom.myphotostories.domain.models.photomodels.PhotoEmpty
 import com.merfilom.myphotostories.viewmodels.Photo1ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo2ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo3ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo4ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo5ViewModel
-import com.merfilom.myphotostories.viewmodels.PhotoEmptyViewModel
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat

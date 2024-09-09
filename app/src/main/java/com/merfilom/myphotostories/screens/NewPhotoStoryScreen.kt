@@ -1,15 +1,12 @@
 package com.merfilom.myphotostories.screens
 
-import android.content.Context
 import android.net.Uri
-import android.util.Log
+import android.os.Build
 import androidx.activity.compose.BackHandler
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.ScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -41,13 +38,11 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -79,7 +74,10 @@ import com.merfilom.myphotostories.viewmodels.Photo2ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo3ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo4ViewModel
 import com.merfilom.myphotostories.viewmodels.Photo5ViewModel
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewPhotoStoryScreen(navController: NavController, photoKey: String){
@@ -101,12 +99,6 @@ fun NewPhotoStoryScreen(navController: NavController, photoKey: String){
     var currentIndex = rememberSaveable { mutableStateOf(0) }
     var indexToDelete by remember { mutableStateOf(-1) }
     val listState = rememberLazyListState()
-
-
-//    val sharedPreferences = context.getSharedPreferences("photo_prefs", Context.MODE_PRIVATE)
-//    val lastViewedIndex = sharedPreferences.getInt("last_viewed_index", 0)
-    //val listState = rememberLazyListState(initialFirstVisibleItemIndex = lastViewedIndex)
-
 
     BackHandler {
         navController.navigate("MainScreen")
@@ -153,9 +145,6 @@ BoxWithConstraints(
                 else -> emptyList()
             }
             LaunchedEffect(photos) {
-//                   currentIndex.value = if (lastViewedIndex < photos.size) lastViewedIndex else 0
-//                   bigPhoto.value = photos[currentIndex.value].image.toUri()
-//                   bigText.value = photos[currentIndex.value].content
                 when(photoKey){
                     "pfirst" -> {
                         if (photos1.isNotEmpty()) {
@@ -195,11 +184,6 @@ BoxWithConstraints(
                 }
 
             }
-//            DisposableEffect(Unit) {
-//                onDispose {
-//                    sharedPreferences.edit().putInt("last_viewed_index", currentIndex.value).apply()
-//                }
-//            }
                 LazyRow(state = listState,
                     modifier = Modifier
                         .fillMaxSize()
@@ -228,7 +212,6 @@ BoxWithConstraints(
                                 if(image.isNotEmpty()){
                                     bigPhoto.value = changedImage.toUri()
                                     bigText.value = content
-                                    //currentIndex.value = index
                                 }
                             }
                         ){
@@ -265,6 +248,21 @@ BoxWithConstraints(
                                             contentScale = ContentScale.Crop
                                         )
                                         Box(modifier = Modifier
+                                            .align(Alignment.TopStart)
+                                            .padding(start = 4.dp, top = 4.dp)
+                                            .background(colorResource(id = R.color.transparentwhite),
+                                                CircleShape)
+                                        ){
+                                            val formattedDate = extractAndFormatDate(changedImage)
+                                            Text(
+                                                text = formattedDate,
+                                                modifier = Modifier.padding(4.dp),
+                                                fontSize = 10.sp,
+                                                color = colorResource(id = R.color.black),
+                                                fontWeight = FontWeight.Bold,
+                                            )
+                                        }
+                                        Box(modifier = Modifier
                                             .size(32.dp)
                                             .align(Alignment.TopEnd)
                                             .padding(4.dp)
@@ -273,7 +271,6 @@ BoxWithConstraints(
                                                 CircleShape
                                             )
                                             .clickable {
-                                                // currentIndex.value = index
                                                 indexToDelete = index
                                                 showDialogItems.value = true
                                             },
@@ -454,6 +451,15 @@ BoxWithConstraints(
         }
     }
 }
+}
+@RequiresApi(Build.VERSION_CODES.O)
+fun extractAndFormatDate(uriString: String): String {
+    val regex = Regex("""JPEG_(\d{8})_""")
+    val matchResult = regex.find(uriString)
+    val dateString = matchResult?.groups?.get(1)?.value ?: return "Date not found"
+    val date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyyMMdd"))
+    val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+    return date.format(formatter)
 }
 fun parsePhotoString(photoString: String): Pair<String, String> {
     val regex = """content=(.+?),\s*image=(.+)\)""".toRegex()

@@ -5,12 +5,8 @@ import android.net.Uri
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.merfilom.myphotostories.domain.models.photomodels.Photo2
 import com.merfilom.myphotostories.domain.models.photomodels.Photo5
-import com.merfilom.myphotostories.domain.models.photomodels.Story2
-import com.merfilom.myphotostories.domain.models.photomodels.Story5
 import com.merfilom.myphotostories.domain.usecases.Delete5UseCase
-import com.merfilom.myphotostories.domain.usecases.DeleteAll2UseCase
 import com.merfilom.myphotostories.domain.usecases.DeleteAll5UseCase
 import com.merfilom.myphotostories.domain.usecases.GetAll5UseCase
 import com.merfilom.myphotostories.domain.usecases.GetRowCount5UseCase
@@ -36,9 +32,6 @@ class Photo5ViewModel @Inject constructor(
     private val _photos5 = MutableStateFlow<List<Photo5>>(emptyList())
     val photos5: StateFlow<List<Photo5>> = _photos5
 
-    private val _stories5 = MutableStateFlow<List<Story5>>(emptyList())
-    val stories5: StateFlow<List<Story5>> = _stories5
-
     init {
         viewModelScope.launch {
             getAll5UseCase.photoExecute().collect { photoList ->
@@ -49,12 +42,6 @@ class Photo5ViewModel @Inject constructor(
     fun insertNewPhoto(photo5: Photo5) {
         viewModelScope.launch(Dispatchers.IO) {
             insert5UseCase.photoExecute(photo5)
-        }
-    }
-
-    fun insertNewPhotoStory(story5: Story5) {
-        viewModelScope.launch(Dispatchers.IO) {
-            insert5UseCase.storyExecute(story5)
         }
     }
     fun deleteNewPhoto(photo5 : Photo5, context : Context){
@@ -81,11 +68,6 @@ class Photo5ViewModel @Inject constructor(
             }
         }
     }
-    fun deleteNewPhotoStory(story5 : Story5){
-        viewModelScope.launch(Dispatchers.IO) {
-            delete5UseCase.storyExecute(story5)
-        }
-    }
     fun getAll5NewPhoto(): List<Photo5>  {
         var photoList = emptyList<Photo5>()
         viewModelScope.launch {
@@ -94,13 +76,6 @@ class Photo5ViewModel @Inject constructor(
             }
         }
         return photoList
-    }
-    fun getAll5NewPhotoStory() {
-        viewModelScope.launch {
-            getAll5UseCase.storyExecute().collect { storyList ->
-                _stories5.value = storyList
-            }
-        }
     }
     fun deleteAll5Photo(context : Context) {
         viewModelScope.launch {

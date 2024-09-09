@@ -7,10 +7,6 @@ import com.merfilom.myphotostories.data.dao.photodao.Photo4EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo5EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.PhotoEmptyEntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Story1EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Story2EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Story3EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Story4EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Story5EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.StoryEmptyEntityDao
 import com.merfilom.myphotostories.data.repositories.photoimpl.Photo1RepositoryImpl
 import com.merfilom.myphotostories.data.repositories.photoimpl.Photo2RepositoryImpl
@@ -19,10 +15,6 @@ import com.merfilom.myphotostories.data.repositories.photoimpl.Photo4RepositoryI
 import com.merfilom.myphotostories.data.repositories.photoimpl.Photo5RepositoryImpl
 import com.merfilom.myphotostories.data.repositories.photoimpl.PhotoEmptyRepositoryImpl
 import com.merfilom.myphotostories.data.repositories.photostoryimpl.PhotoStory1RepositoryImpl
-import com.merfilom.myphotostories.data.repositories.photostoryimpl.PhotoStory2RepositoryImpl
-import com.merfilom.myphotostories.data.repositories.photostoryimpl.PhotoStory3RepositoryImpl
-import com.merfilom.myphotostories.data.repositories.photostoryimpl.PhotoStory4RepositoryImpl
-import com.merfilom.myphotostories.data.repositories.photostoryimpl.PhotoStory5RepositoryImpl
 import com.merfilom.myphotostories.data.repositories.photostoryimpl.PhotoStoryEmptyRepositoryImpl
 import com.merfilom.myphotostories.domain.repositories.photo.Photo1Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo2Repository
@@ -31,10 +23,6 @@ import com.merfilom.myphotostories.domain.repositories.photo.Photo4Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo5Repository
 import com.merfilom.myphotostories.domain.repositories.photo.PhotoEmptyRepository
 import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStory1Repository
-import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStory2Repository
-import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStory3Repository
-import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStory4Repository
-import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStory5Repository
 import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStoryEmptyRepository
 import dagger.Module
 import dagger.Provides
@@ -87,25 +75,5 @@ object DataModule {
     @Provides
     fun providePhotoStory1Repository(story1EntityDao: Story1EntityDao): PhotoStory1Repository {
         return  PhotoStory1RepositoryImpl(story1EntityDao = story1EntityDao)
-    }
-    @Singleton
-    @Provides
-    fun providePhotoStory2Repository(story2EntityDao: Story2EntityDao): PhotoStory2Repository {
-        return  PhotoStory2RepositoryImpl(story2EntityDao = story2EntityDao)
-    }
-    @Singleton
-    @Provides
-    fun providePhotoStory3Repository(story3EntityDao: Story3EntityDao): PhotoStory3Repository {
-        return  PhotoStory3RepositoryImpl(story3EntityDao = story3EntityDao)
-    }
-    @Singleton
-    @Provides
-    fun providePhotoStory4Repository(story4EntityDao: Story4EntityDao): PhotoStory4Repository {
-        return  PhotoStory4RepositoryImpl(story4EntityDao = story4EntityDao)
-    }
-    @Singleton
-    @Provides
-    fun providePhotoStory5Repository(story5EntityDao: Story5EntityDao): PhotoStory5Repository {
-        return  PhotoStory5RepositoryImpl(story5EntityDao = story5EntityDao)
     }
 }

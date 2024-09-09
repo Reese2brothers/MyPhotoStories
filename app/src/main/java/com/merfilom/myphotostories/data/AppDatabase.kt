@@ -11,10 +11,6 @@ import com.merfilom.myphotostories.data.dao.photodao.Photo4EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo5EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.PhotoEmptyEntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Story1EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Story2EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Story3EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Story4EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Story5EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.StoryEmptyEntityDao
 import com.merfilom.myphotostories.data.models.photomodels.Photo1Entity
 import com.merfilom.myphotostories.data.models.photomodels.Photo2Entity
@@ -23,16 +19,11 @@ import com.merfilom.myphotostories.data.models.photomodels.Photo4Entity
 import com.merfilom.myphotostories.data.models.photomodels.Photo5Entity
 import com.merfilom.myphotostories.data.models.photomodels.PhotoEmptyEntity
 import com.merfilom.myphotostories.data.models.photomodels.Story1Entity
-import com.merfilom.myphotostories.data.models.photomodels.Story2Entity
-import com.merfilom.myphotostories.data.models.photomodels.Story3Entity
-import com.merfilom.myphotostories.data.models.photomodels.Story4Entity
-import com.merfilom.myphotostories.data.models.photomodels.Story5Entity
 import com.merfilom.myphotostories.data.models.photomodels.StoryEmptyEntity
 
 @Database(entities = [
     PhotoEmptyEntity::class,Photo1Entity::class, Photo2Entity::class, Photo3Entity::class, Photo4Entity::class,
-    Photo5Entity::class, StoryEmptyEntity::class, Story1Entity::class, Story2Entity::class, Story3Entity::class, Story4Entity::class,
-    Story5Entity::class,],
+    Photo5Entity::class, StoryEmptyEntity::class, Story1Entity::class],
     version = 1, exportSchema = false)
     abstract class AppDatabase : RoomDatabase() {
 
@@ -44,10 +35,6 @@ import com.merfilom.myphotostories.data.models.photomodels.StoryEmptyEntity
     abstract fun photo5EntityDao() : Photo5EntityDao
     abstract fun storyEmptyEntityDao() : StoryEmptyEntityDao
     abstract fun story1EntityDao() : Story1EntityDao
-    abstract fun story2EntityDao() : Story2EntityDao
-    abstract fun story3EntityDao() : Story3EntityDao
-    abstract fun story4EntityDao() : Story4EntityDao
-    abstract fun story5EntityDao() : Story5EntityDao
 
     companion object {
         @Volatile

@@ -89,7 +89,6 @@ dependencies {
     implementation ("com.google.accompanist:accompanist-pager:0.30.1")
     implementation ("com.google.accompanist:accompanist-pager-indicators:0.30.1")
     implementation ("com.google.accompanist:accompanist-permissions:0.30.1")
-    //implementation ("com.google.accompanist:accompanist-gesture:0.36.0")
 
     //Hilt
     implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")

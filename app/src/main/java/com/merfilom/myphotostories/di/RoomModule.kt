@@ -9,10 +9,6 @@ import com.merfilom.myphotostories.data.dao.photodao.Photo4EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo5EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.PhotoEmptyEntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Story1EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Story2EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Story3EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Story4EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Story5EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.StoryEmptyEntityDao
 import dagger.Module
 import dagger.Provides
@@ -72,24 +68,5 @@ class RoomModule {
     fun provideStory1Dao(roomDatabase : AppDatabase): Story1EntityDao {
         return roomDatabase.story1EntityDao()
     }
-    @Singleton
-    @Provides
-    fun provideStory2Dao(roomDatabase : AppDatabase): Story2EntityDao {
-        return roomDatabase.story2EntityDao()
-    }
-    @Singleton
-    @Provides
-    fun provideStory3Dao(roomDatabase : AppDatabase): Story3EntityDao {
-        return roomDatabase.story3EntityDao()
-    }
-    @Singleton
-    @Provides
-    fun provideStory4Dao(roomDatabase : AppDatabase): Story4EntityDao {
-        return roomDatabase.story4EntityDao()
-    }
-    @Singleton
-    @Provides
-    fun provideStory5Dao(roomDatabase : AppDatabase): Story5EntityDao {
-        return roomDatabase.story5EntityDao()
-    }
+
 }

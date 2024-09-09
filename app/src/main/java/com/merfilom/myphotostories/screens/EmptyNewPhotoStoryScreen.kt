@@ -184,7 +184,7 @@ fun EmptyNewPhotoStoryScreen(navController: NavController){
                                     Box{
                                         AsyncImage(
                                             model = ImageRequest.Builder(context)
-                                                .data(item.image ?: R.drawable.fotik)
+                                                .data(item.image)
                                                 .crossfade(true)
                                                 .build(),
                                             contentDescription = "item_photo",
@@ -394,7 +394,6 @@ fun EmptyBottomButtons(modifier: Modifier, navController: NavController, deleteS
     val viewModel4: Photo4ViewModel = hiltViewModel()
     val viewModel5: Photo5ViewModel = hiltViewModel()
     val photosEmpty by viewModel.photosEmpty.collectAsState(initial = emptyList())
-    val stories1 by viewModel1.stories1.collectAsState(initial = emptyList())
     val scope = rememberCoroutineScope()
     Card(
         Modifier

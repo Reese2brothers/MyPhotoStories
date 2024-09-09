@@ -7,10 +7,6 @@ import com.merfilom.myphotostories.domain.repositories.photo.Photo4Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo5Repository
 import com.merfilom.myphotostories.domain.repositories.photo.PhotoEmptyRepository
 import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStory1Repository
-import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStory2Repository
-import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStory3Repository
-import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStory4Repository
-import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStory5Repository
 import com.merfilom.myphotostories.domain.repositories.photostory.PhotoStoryEmptyRepository
 import com.merfilom.myphotostories.domain.usecases.CopyIntoUseCase
 import com.merfilom.myphotostories.domain.usecases.DecrementAllStory1IdsUseCase
@@ -70,20 +66,20 @@ object DomainModule {
         return  Delete1UseCase(photo1Repository = photo1Repository, story1Repository = story1Repository)
     }
     @Provides
-    fun provideDelete2UseCase(photo2Repository: Photo2Repository, story2Repository: PhotoStory2Repository): Delete2UseCase {
-        return  Delete2UseCase(photo2Repository = photo2Repository, story2Repository = story2Repository)
+    fun provideDelete2UseCase(photo2Repository: Photo2Repository): Delete2UseCase {
+        return  Delete2UseCase(photo2Repository = photo2Repository)
     }
     @Provides
-    fun provideDelete3UseCase(photo3Repository: Photo3Repository, story3Repository: PhotoStory3Repository): Delete3UseCase {
-        return  Delete3UseCase(photo3Repository = photo3Repository, story3Repository = story3Repository)
+    fun provideDelete3UseCase(photo3Repository: Photo3Repository): Delete3UseCase {
+        return  Delete3UseCase(photo3Repository = photo3Repository)
     }
     @Provides
-    fun provideDelete4UseCase(photo4Repository: Photo4Repository, story4Repository: PhotoStory4Repository): Delete4UseCase {
-        return  Delete4UseCase(photo4Repository = photo4Repository, story4Repository = story4Repository)
+    fun provideDelete4UseCase(photo4Repository: Photo4Repository): Delete4UseCase {
+        return  Delete4UseCase(photo4Repository = photo4Repository)
     }
     @Provides
-    fun provideDelete5UseCase(photo5Repository: Photo5Repository, story5Repository: PhotoStory5Repository): Delete5UseCase {
-        return  Delete5UseCase(photo5Repository = photo5Repository, story5Repository = story5Repository)
+    fun provideDelete5UseCase(photo5Repository: Photo5Repository): Delete5UseCase {
+        return  Delete5UseCase(photo5Repository = photo5Repository)
     }
 
 
@@ -97,20 +93,20 @@ object DomainModule {
         return  DeleteAll1UseCase(photo1Repository = photo1Repository, story1Repository = story1Repository)
     }
     @Provides
-    fun provideDeleteAll2UseCase(photo2Repository: Photo2Repository, story2Repository: PhotoStory2Repository): DeleteAll2UseCase {
-        return  DeleteAll2UseCase(photo2Repository = photo2Repository, story2Repository = story2Repository)
+    fun provideDeleteAll2UseCase(photo2Repository: Photo2Repository): DeleteAll2UseCase {
+        return  DeleteAll2UseCase(photo2Repository = photo2Repository)
     }
     @Provides
-    fun provideDeleteAll3UseCase(photo3Repository: Photo3Repository, story3Repository: PhotoStory3Repository): DeleteAll3UseCase {
-        return  DeleteAll3UseCase(photo3Repository = photo3Repository, story3Repository = story3Repository)
+    fun provideDeleteAll3UseCase(photo3Repository: Photo3Repository): DeleteAll3UseCase {
+        return  DeleteAll3UseCase(photo3Repository = photo3Repository)
     }
     @Provides
-    fun provideDeleteAll4UseCase(photo4Repository: Photo4Repository, story4Repository: PhotoStory4Repository): DeleteAll4UseCase {
-        return  DeleteAll4UseCase(photo4Repository = photo4Repository, story4Repository = story4Repository)
+    fun provideDeleteAll4UseCase(photo4Repository: Photo4Repository): DeleteAll4UseCase {
+        return  DeleteAll4UseCase(photo4Repository = photo4Repository)
     }
     @Provides
-    fun provideDeleteAll5UseCase(photo5Repository: Photo5Repository, story5Repository: PhotoStory5Repository): DeleteAll5UseCase {
-        return  DeleteAll5UseCase(photo5Repository = photo5Repository, story5Repository = story5Repository)
+    fun provideDeleteAll5UseCase(photo5Repository: Photo5Repository): DeleteAll5UseCase {
+        return  DeleteAll5UseCase(photo5Repository = photo5Repository)
     }
 
 
@@ -124,20 +120,20 @@ object DomainModule {
         return Insert1UseCase(photo1Repository = photo1Repository, story1Repository = story1Repository)
     }
     @Provides
-    fun provideInsert2UseCase(photo2Repository: Photo2Repository, story2Repository: PhotoStory2Repository): Insert2UseCase {
-        return Insert2UseCase(photo2Repository = photo2Repository, story2Repository = story2Repository)
+    fun provideInsert2UseCase(photo2Repository: Photo2Repository): Insert2UseCase {
+        return Insert2UseCase(photo2Repository = photo2Repository)
     }
     @Provides
-    fun provideInsert3UseCase(photo3Repository: Photo3Repository, story3Repository: PhotoStory3Repository): Insert3UseCase {
-        return Insert3UseCase(photo3Repository = photo3Repository, story3Repository = story3Repository)
+    fun provideInsert3UseCase(photo3Repository: Photo3Repository): Insert3UseCase {
+        return Insert3UseCase(photo3Repository = photo3Repository)
     }
     @Provides
-    fun provideInsert4UseCase(photo4Repository: Photo4Repository, story4Repository: PhotoStory4Repository): Insert4UseCase {
-        return Insert4UseCase(photo4Repository = photo4Repository, story4Repository = story4Repository)
+    fun provideInsert4UseCase(photo4Repository: Photo4Repository): Insert4UseCase {
+        return Insert4UseCase(photo4Repository = photo4Repository)
     }
     @Provides
-    fun provideInsert5UseCase(photo5Repository: Photo5Repository, story5Repository: PhotoStory5Repository): Insert5UseCase {
-        return Insert5UseCase(photo5Repository = photo5Repository, story5Repository = story5Repository)
+    fun provideInsert5UseCase(photo5Repository: Photo5Repository): Insert5UseCase {
+        return Insert5UseCase(photo5Repository = photo5Repository)
     }
 
 
@@ -151,20 +147,20 @@ object DomainModule {
         return GetAll1UseCase(photo1Repository = photo1Repository, photoStory1Repository = story1Repository)
     }
     @Provides
-    fun provideGetAll2UseCase(photo2Repository: Photo2Repository, story2Repository: PhotoStory2Repository): GetAll2UseCase {
-        return GetAll2UseCase(photo2Repository = photo2Repository, photoStory2Repository = story2Repository)
+    fun provideGetAll2UseCase(photo2Repository: Photo2Repository): GetAll2UseCase {
+        return GetAll2UseCase(photo2Repository = photo2Repository)
     }
     @Provides
-    fun provideGetAll3UseCase(photo3Repository: Photo3Repository, story3Repository: PhotoStory3Repository): GetAll3UseCase {
-        return GetAll3UseCase(photo3Repository = photo3Repository, photoStory3Repository = story3Repository)
+    fun provideGetAll3UseCase(photo3Repository: Photo3Repository): GetAll3UseCase {
+        return GetAll3UseCase(photo3Repository = photo3Repository)
     }
     @Provides
-    fun provideGetAll4UseCase(photo4Repository: Photo4Repository, story4Repository: PhotoStory4Repository): GetAll4UseCase {
-        return GetAll4UseCase(photo4Repository = photo4Repository, photoStory4Repository = story4Repository)
+    fun provideGetAll4UseCase(photo4Repository: Photo4Repository): GetAll4UseCase {
+        return GetAll4UseCase(photo4Repository = photo4Repository)
     }
     @Provides
-    fun provideGetAll5UseCase(photo5Repository: Photo5Repository, story5Repository: PhotoStory5Repository): GetAll5UseCase {
-        return GetAll5UseCase(photo5Repository = photo5Repository, photoStory5Repository = story5Repository)
+    fun provideGetAll5UseCase(photo5Repository: Photo5Repository): GetAll5UseCase {
+        return GetAll5UseCase(photo5Repository = photo5Repository)
     }
 
 
