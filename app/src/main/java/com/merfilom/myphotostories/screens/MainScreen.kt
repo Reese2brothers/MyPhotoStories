@@ -3,6 +3,7 @@ package com.merfilom.myphotostories.screens
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
@@ -36,6 +37,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -55,6 +59,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.merfilom.myphotostories.R
 import com.merfilom.myphotostories.viewmodels.photoviewmodels.Photo1ViewModel
+import kotlinx.coroutines.launch
 
 @SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -64,6 +69,9 @@ fun MainScreen(context : Context, navController: NavController) {
     val viewModel1: Photo1ViewModel = hiltViewModel()
     val stories1 by viewModel1.stories1.collectAsState(initial = emptyList())
     val listState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
+    val sharedPreferences = context.getSharedPreferences("app_photo_prefs", Context.MODE_PRIVATE)
+    var lastClickedIndex by remember { mutableStateOf(loadLastClickedIndex(sharedPreferences)) }
 
     BackHandler {
         activity?.finishAffinity()
@@ -71,6 +79,13 @@ fun MainScreen(context : Context, navController: NavController) {
 
     LaunchedEffect(Unit) {
         viewModel1.getAll1NewPhotoStory()
+    }
+    LaunchedEffect(stories1) {
+        if (lastClickedIndex != -1) {
+            coroutineScope.launch {
+                listState.animateScrollToItem(index = lastClickedIndex)
+            }
+        }
     }
 
     Box(
@@ -241,6 +256,8 @@ fun MainScreen(context : Context, navController: NavController) {
                                     shape = RoundedCornerShape(8.dp),
                                     elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                     onClick = {
+                                        lastClickedIndex = stories1.indexOf(item)
+                                        saveLastClickedIndex(sharedPreferences, lastClickedIndex)
                                         if (item.toString().contains("pfirst")) {
                                             navController.navigate("NewPhotoStoryScreen/pfirst")
                                         }
@@ -778,4 +795,11 @@ fun AddNewVideoStory(navController: NavController){
             )
         }
     }
+}
+fun saveLastClickedIndex(sharedPreferences: SharedPreferences, index: Int) {
+    sharedPreferences.edit().putInt("last_clicked_index", index).apply()
+}
+
+fun loadLastClickedIndex(sharedPreferences: SharedPreferences): Int {
+    return sharedPreferences.getInt("last_clicked_index", -1)
 }
