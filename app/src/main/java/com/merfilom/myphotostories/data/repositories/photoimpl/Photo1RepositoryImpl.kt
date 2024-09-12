@@ -1,14 +1,6 @@
 package com.merfilom.myphotostories.data.repositories.photoimpl
 
-import com.merfilom.myphotostories.data.dao.photodao.Photo1EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Photo2EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Photo3EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Photo4EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Photo5EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Photo6EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Photo7EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Photo8EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Photo9EntityDao
+import com.merfilom.myphotostories.data.dao.photodao.Photo100EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo10EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo11EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo12EntityDao
@@ -19,6 +11,7 @@ import com.merfilom.myphotostories.data.dao.photodao.Photo16EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo17EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo18EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo19EntityDao
+import com.merfilom.myphotostories.data.dao.photodao.Photo1EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo20EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo21EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo22EntityDao
@@ -29,6 +22,7 @@ import com.merfilom.myphotostories.data.dao.photodao.Photo26EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo27EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo28EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo29EntityDao
+import com.merfilom.myphotostories.data.dao.photodao.Photo2EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo30EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo31EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo32EntityDao
@@ -39,6 +33,7 @@ import com.merfilom.myphotostories.data.dao.photodao.Photo36EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo37EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo38EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo39EntityDao
+import com.merfilom.myphotostories.data.dao.photodao.Photo3EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo40EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo41EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo42EntityDao
@@ -49,6 +44,7 @@ import com.merfilom.myphotostories.data.dao.photodao.Photo46EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo47EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo48EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo49EntityDao
+import com.merfilom.myphotostories.data.dao.photodao.Photo4EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo50EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo51EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo52EntityDao
@@ -59,6 +55,7 @@ import com.merfilom.myphotostories.data.dao.photodao.Photo56EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo57EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo58EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo59EntityDao
+import com.merfilom.myphotostories.data.dao.photodao.Photo5EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo60EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo61EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo62EntityDao
@@ -69,6 +66,7 @@ import com.merfilom.myphotostories.data.dao.photodao.Photo66EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo67EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo68EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo69EntityDao
+import com.merfilom.myphotostories.data.dao.photodao.Photo6EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo70EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo71EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo72EntityDao
@@ -79,6 +77,7 @@ import com.merfilom.myphotostories.data.dao.photodao.Photo76EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo77EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo78EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo79EntityDao
+import com.merfilom.myphotostories.data.dao.photodao.Photo7EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo80EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo81EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo82EntityDao
@@ -89,6 +88,7 @@ import com.merfilom.myphotostories.data.dao.photodao.Photo86EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo87EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo88EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo89EntityDao
+import com.merfilom.myphotostories.data.dao.photodao.Photo8EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo90EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo91EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo92EntityDao
@@ -99,16 +99,8 @@ import com.merfilom.myphotostories.data.dao.photodao.Photo96EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo97EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo98EntityDao
 import com.merfilom.myphotostories.data.dao.photodao.Photo99EntityDao
-import com.merfilom.myphotostories.data.dao.photodao.Photo100EntityDao
-import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo1ListMapper
-import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo2ListMapper
-import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo3ListMapper
-import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo4ListMapper
-import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo5ListMapper
-import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo6ListMapper
-import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo7ListMapper
-import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo8ListMapper
-import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo9ListMapper
+import com.merfilom.myphotostories.data.dao.photodao.Photo9EntityDao
+import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo100ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo10ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo11ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo12ListMapper
@@ -119,6 +111,7 @@ import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo16ListMappe
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo17ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo18ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo19ListMapper
+import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo1ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo20ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo21ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo22ListMapper
@@ -129,6 +122,7 @@ import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo26ListMappe
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo27ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo28ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo29ListMapper
+import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo2ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo30ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo31ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo32ListMapper
@@ -139,6 +133,7 @@ import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo36ListMappe
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo37ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo38ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo39ListMapper
+import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo3ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo40ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo41ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo42ListMapper
@@ -149,6 +144,7 @@ import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo46ListMappe
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo47ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo48ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo49ListMapper
+import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo4ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo50ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo51ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo52ListMapper
@@ -159,6 +155,7 @@ import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo56ListMappe
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo57ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo58ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo59ListMapper
+import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo5ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo60ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo61ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo62ListMapper
@@ -169,6 +166,7 @@ import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo66ListMappe
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo67ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo68ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo69ListMapper
+import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo6ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo70ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo71ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo72ListMapper
@@ -179,6 +177,7 @@ import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo76ListMappe
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo77ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo78ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo79ListMapper
+import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo7ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo80ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo81ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo82ListMapper
@@ -189,6 +188,7 @@ import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo86ListMappe
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo87ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo88ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo89ListMapper
+import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo8ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo90ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo91ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo92ListMapper
@@ -199,16 +199,8 @@ import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo96ListMappe
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo97ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo98ListMapper
 import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo99ListMapper
-import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo100ListMapper
-import com.merfilom.myphotostories.data.mappers.photomapper.Photo1Mapper
-import com.merfilom.myphotostories.data.mappers.photomapper.Photo2Mapper
-import com.merfilom.myphotostories.data.mappers.photomapper.Photo3Mapper
-import com.merfilom.myphotostories.data.mappers.photomapper.Photo4Mapper
-import com.merfilom.myphotostories.data.mappers.photomapper.Photo5Mapper
-import com.merfilom.myphotostories.data.mappers.photomapper.Photo6Mapper
-import com.merfilom.myphotostories.data.mappers.photomapper.Photo7Mapper
-import com.merfilom.myphotostories.data.mappers.photomapper.Photo8Mapper
-import com.merfilom.myphotostories.data.mappers.photomapper.Photo9Mapper
+import com.merfilom.myphotostories.data.mappers.photolistmapper.Photo9ListMapper
+import com.merfilom.myphotostories.data.mappers.photomapper.Photo100Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo10Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo11Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo12Mapper
@@ -219,6 +211,7 @@ import com.merfilom.myphotostories.data.mappers.photomapper.Photo16Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo17Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo18Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo19Mapper
+import com.merfilom.myphotostories.data.mappers.photomapper.Photo1Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo20Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo21Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo22Mapper
@@ -229,6 +222,7 @@ import com.merfilom.myphotostories.data.mappers.photomapper.Photo26Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo27Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo28Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo29Mapper
+import com.merfilom.myphotostories.data.mappers.photomapper.Photo2Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo30Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo31Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo32Mapper
@@ -239,6 +233,7 @@ import com.merfilom.myphotostories.data.mappers.photomapper.Photo36Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo37Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo38Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo39Mapper
+import com.merfilom.myphotostories.data.mappers.photomapper.Photo3Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo40Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo41Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo42Mapper
@@ -249,6 +244,7 @@ import com.merfilom.myphotostories.data.mappers.photomapper.Photo46Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo47Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo48Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo49Mapper
+import com.merfilom.myphotostories.data.mappers.photomapper.Photo4Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo50Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo51Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo52Mapper
@@ -259,6 +255,7 @@ import com.merfilom.myphotostories.data.mappers.photomapper.Photo56Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo57Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo58Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo59Mapper
+import com.merfilom.myphotostories.data.mappers.photomapper.Photo5Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo60Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo61Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo62Mapper
@@ -269,6 +266,7 @@ import com.merfilom.myphotostories.data.mappers.photomapper.Photo66Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo67Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo68Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo69Mapper
+import com.merfilom.myphotostories.data.mappers.photomapper.Photo6Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo70Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo71Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo72Mapper
@@ -279,6 +277,7 @@ import com.merfilom.myphotostories.data.mappers.photomapper.Photo76Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo77Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo78Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo79Mapper
+import com.merfilom.myphotostories.data.mappers.photomapper.Photo7Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo80Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo81Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo82Mapper
@@ -289,6 +288,7 @@ import com.merfilom.myphotostories.data.mappers.photomapper.Photo86Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo87Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo88Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo89Mapper
+import com.merfilom.myphotostories.data.mappers.photomapper.Photo8Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo90Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo91Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo92Mapper
@@ -299,17 +299,10 @@ import com.merfilom.myphotostories.data.mappers.photomapper.Photo96Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo97Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo98Mapper
 import com.merfilom.myphotostories.data.mappers.photomapper.Photo99Mapper
-import com.merfilom.myphotostories.data.mappers.photomapper.Photo100Mapper
+import com.merfilom.myphotostories.data.mappers.photomapper.Photo9Mapper
 import com.merfilom.myphotostories.domain.models.photomodels.Photo1
-import com.merfilom.myphotostories.domain.models.photomodels.Photo2
-import com.merfilom.myphotostories.domain.models.photomodels.Photo3
-import com.merfilom.myphotostories.domain.models.photomodels.Photo4
-import com.merfilom.myphotostories.domain.models.photomodels.Photo5
-import com.merfilom.myphotostories.domain.models.photomodels.Photo6
-import com.merfilom.myphotostories.domain.models.photomodels.Photo7
-import com.merfilom.myphotostories.domain.models.photomodels.Photo8
-import com.merfilom.myphotostories.domain.models.photomodels.Photo9
 import com.merfilom.myphotostories.domain.models.photomodels.Photo10
+import com.merfilom.myphotostories.domain.models.photomodels.Photo100
 import com.merfilom.myphotostories.domain.models.photomodels.Photo11
 import com.merfilom.myphotostories.domain.models.photomodels.Photo12
 import com.merfilom.myphotostories.domain.models.photomodels.Photo13
@@ -319,6 +312,7 @@ import com.merfilom.myphotostories.domain.models.photomodels.Photo16
 import com.merfilom.myphotostories.domain.models.photomodels.Photo17
 import com.merfilom.myphotostories.domain.models.photomodels.Photo18
 import com.merfilom.myphotostories.domain.models.photomodels.Photo19
+import com.merfilom.myphotostories.domain.models.photomodels.Photo2
 import com.merfilom.myphotostories.domain.models.photomodels.Photo20
 import com.merfilom.myphotostories.domain.models.photomodels.Photo21
 import com.merfilom.myphotostories.domain.models.photomodels.Photo22
@@ -329,6 +323,7 @@ import com.merfilom.myphotostories.domain.models.photomodels.Photo26
 import com.merfilom.myphotostories.domain.models.photomodels.Photo27
 import com.merfilom.myphotostories.domain.models.photomodels.Photo28
 import com.merfilom.myphotostories.domain.models.photomodels.Photo29
+import com.merfilom.myphotostories.domain.models.photomodels.Photo3
 import com.merfilom.myphotostories.domain.models.photomodels.Photo30
 import com.merfilom.myphotostories.domain.models.photomodels.Photo31
 import com.merfilom.myphotostories.domain.models.photomodels.Photo32
@@ -339,6 +334,7 @@ import com.merfilom.myphotostories.domain.models.photomodels.Photo36
 import com.merfilom.myphotostories.domain.models.photomodels.Photo37
 import com.merfilom.myphotostories.domain.models.photomodels.Photo38
 import com.merfilom.myphotostories.domain.models.photomodels.Photo39
+import com.merfilom.myphotostories.domain.models.photomodels.Photo4
 import com.merfilom.myphotostories.domain.models.photomodels.Photo40
 import com.merfilom.myphotostories.domain.models.photomodels.Photo41
 import com.merfilom.myphotostories.domain.models.photomodels.Photo42
@@ -349,6 +345,7 @@ import com.merfilom.myphotostories.domain.models.photomodels.Photo46
 import com.merfilom.myphotostories.domain.models.photomodels.Photo47
 import com.merfilom.myphotostories.domain.models.photomodels.Photo48
 import com.merfilom.myphotostories.domain.models.photomodels.Photo49
+import com.merfilom.myphotostories.domain.models.photomodels.Photo5
 import com.merfilom.myphotostories.domain.models.photomodels.Photo50
 import com.merfilom.myphotostories.domain.models.photomodels.Photo51
 import com.merfilom.myphotostories.domain.models.photomodels.Photo52
@@ -359,6 +356,7 @@ import com.merfilom.myphotostories.domain.models.photomodels.Photo56
 import com.merfilom.myphotostories.domain.models.photomodels.Photo57
 import com.merfilom.myphotostories.domain.models.photomodels.Photo58
 import com.merfilom.myphotostories.domain.models.photomodels.Photo59
+import com.merfilom.myphotostories.domain.models.photomodels.Photo6
 import com.merfilom.myphotostories.domain.models.photomodels.Photo60
 import com.merfilom.myphotostories.domain.models.photomodels.Photo61
 import com.merfilom.myphotostories.domain.models.photomodels.Photo62
@@ -369,6 +367,7 @@ import com.merfilom.myphotostories.domain.models.photomodels.Photo66
 import com.merfilom.myphotostories.domain.models.photomodels.Photo67
 import com.merfilom.myphotostories.domain.models.photomodels.Photo68
 import com.merfilom.myphotostories.domain.models.photomodels.Photo69
+import com.merfilom.myphotostories.domain.models.photomodels.Photo7
 import com.merfilom.myphotostories.domain.models.photomodels.Photo70
 import com.merfilom.myphotostories.domain.models.photomodels.Photo71
 import com.merfilom.myphotostories.domain.models.photomodels.Photo72
@@ -379,6 +378,7 @@ import com.merfilom.myphotostories.domain.models.photomodels.Photo76
 import com.merfilom.myphotostories.domain.models.photomodels.Photo77
 import com.merfilom.myphotostories.domain.models.photomodels.Photo78
 import com.merfilom.myphotostories.domain.models.photomodels.Photo79
+import com.merfilom.myphotostories.domain.models.photomodels.Photo8
 import com.merfilom.myphotostories.domain.models.photomodels.Photo80
 import com.merfilom.myphotostories.domain.models.photomodels.Photo81
 import com.merfilom.myphotostories.domain.models.photomodels.Photo82
@@ -389,6 +389,7 @@ import com.merfilom.myphotostories.domain.models.photomodels.Photo86
 import com.merfilom.myphotostories.domain.models.photomodels.Photo87
 import com.merfilom.myphotostories.domain.models.photomodels.Photo88
 import com.merfilom.myphotostories.domain.models.photomodels.Photo89
+import com.merfilom.myphotostories.domain.models.photomodels.Photo9
 import com.merfilom.myphotostories.domain.models.photomodels.Photo90
 import com.merfilom.myphotostories.domain.models.photomodels.Photo91
 import com.merfilom.myphotostories.domain.models.photomodels.Photo92
@@ -399,16 +400,7 @@ import com.merfilom.myphotostories.domain.models.photomodels.Photo96
 import com.merfilom.myphotostories.domain.models.photomodels.Photo97
 import com.merfilom.myphotostories.domain.models.photomodels.Photo98
 import com.merfilom.myphotostories.domain.models.photomodels.Photo99
-import com.merfilom.myphotostories.domain.models.photomodels.Photo100
-import com.merfilom.myphotostories.domain.repositories.photo.Photo1Repository
-import com.merfilom.myphotostories.domain.repositories.photo.Photo2Repository
-import com.merfilom.myphotostories.domain.repositories.photo.Photo3Repository
-import com.merfilom.myphotostories.domain.repositories.photo.Photo4Repository
-import com.merfilom.myphotostories.domain.repositories.photo.Photo5Repository
-import com.merfilom.myphotostories.domain.repositories.photo.Photo6Repository
-import com.merfilom.myphotostories.domain.repositories.photo.Photo7Repository
-import com.merfilom.myphotostories.domain.repositories.photo.Photo8Repository
-import com.merfilom.myphotostories.domain.repositories.photo.Photo9Repository
+import com.merfilom.myphotostories.domain.repositories.photo.Photo100Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo10Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo11Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo12Repository
@@ -419,6 +411,7 @@ import com.merfilom.myphotostories.domain.repositories.photo.Photo16Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo17Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo18Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo19Repository
+import com.merfilom.myphotostories.domain.repositories.photo.Photo1Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo20Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo21Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo22Repository
@@ -429,6 +422,7 @@ import com.merfilom.myphotostories.domain.repositories.photo.Photo26Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo27Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo28Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo29Repository
+import com.merfilom.myphotostories.domain.repositories.photo.Photo2Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo30Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo31Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo32Repository
@@ -439,6 +433,7 @@ import com.merfilom.myphotostories.domain.repositories.photo.Photo36Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo37Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo38Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo39Repository
+import com.merfilom.myphotostories.domain.repositories.photo.Photo3Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo40Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo41Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo42Repository
@@ -449,6 +444,7 @@ import com.merfilom.myphotostories.domain.repositories.photo.Photo46Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo47Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo48Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo49Repository
+import com.merfilom.myphotostories.domain.repositories.photo.Photo4Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo50Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo51Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo52Repository
@@ -459,6 +455,7 @@ import com.merfilom.myphotostories.domain.repositories.photo.Photo56Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo57Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo58Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo59Repository
+import com.merfilom.myphotostories.domain.repositories.photo.Photo5Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo60Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo61Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo62Repository
@@ -469,6 +466,7 @@ import com.merfilom.myphotostories.domain.repositories.photo.Photo66Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo67Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo68Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo69Repository
+import com.merfilom.myphotostories.domain.repositories.photo.Photo6Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo70Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo71Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo72Repository
@@ -479,6 +477,7 @@ import com.merfilom.myphotostories.domain.repositories.photo.Photo76Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo77Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo78Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo79Repository
+import com.merfilom.myphotostories.domain.repositories.photo.Photo7Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo80Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo81Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo82Repository
@@ -489,6 +488,7 @@ import com.merfilom.myphotostories.domain.repositories.photo.Photo86Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo87Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo88Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo89Repository
+import com.merfilom.myphotostories.domain.repositories.photo.Photo8Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo90Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo91Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo92Repository
@@ -499,7 +499,7 @@ import com.merfilom.myphotostories.domain.repositories.photo.Photo96Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo97Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo98Repository
 import com.merfilom.myphotostories.domain.repositories.photo.Photo99Repository
-import com.merfilom.myphotostories.domain.repositories.photo.Photo100Repository
+import com.merfilom.myphotostories.domain.repositories.photo.Photo9Repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

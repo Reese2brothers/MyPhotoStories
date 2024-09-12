@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -33,6 +34,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -51,7 +54,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.merfilom.myphotostories.R
-import com.merfilom.myphotostories.viewmodels.Photo1ViewModel
+import com.merfilom.myphotostories.viewmodels.photoviewmodels.Photo1ViewModel
 
 @SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -60,6 +63,7 @@ fun MainScreen(context : Context, navController: NavController) {
     val activity = LocalContext.current as? Activity
     val viewModel1: Photo1ViewModel = hiltViewModel()
     val stories1 by viewModel1.stories1.collectAsState(initial = emptyList())
+    val listState = rememberLazyListState()
 
     BackHandler {
         activity?.finishAffinity()
@@ -221,7 +225,7 @@ fun MainScreen(context : Context, navController: NavController) {
                                 fontWeight = FontWeight.Bold,
                             )
                         }
-                        LazyColumn(
+                        LazyColumn(state = listState,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .fillMaxHeight(),
@@ -251,6 +255,291 @@ fun MainScreen(context : Context, navController: NavController) {
                                         }
                                         if(item.toString().contains("pfifth")){
                                             navController.navigate("NewPhotoStoryScreen/pfifth")
+                                        }
+                                        if (item.toString().contains("psixth")) {
+                                            navController.navigate("NewPhotoStoryScreen/psixth")
+                                        }
+                                        if (item.toString().contains("pseventh")) {
+                                            navController.navigate("NewPhotoStoryScreen/pseventh")
+                                        }
+                                        if (item.toString().contains("peighth")) {
+                                            navController.navigate("NewPhotoStoryScreen/peighth")
+                                        }
+                                        if (item.toString().contains("pninth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pninth")
+                                        }
+                                        if (item.toString().contains("ptenth")) {
+                                            navController.navigate("NewPhotoStoryScreen/ptenth")
+                                        }
+                                        if (item.toString().contains("peleventh")) {
+                                            navController.navigate("NewPhotoStoryScreen/peleventh")
+                                        }
+                                        if (item.toString().contains("ptwelfth")) {
+                                            navController.navigate("NewPhotoStoryScreen/ptwelfth")
+                                        }
+                                        if (item.toString().contains("pthirteenth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pthirteenth")
+                                        }
+                                        if (item.toString().contains("pfourteenth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfourteenth")
+                                        }
+                                        if (item.toString().contains("pfifteenth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfifteenth")
+                                        }
+                                        if (item.toString().contains("psixteenth")) {
+                                            navController.navigate("NewPhotoStoryScreen/psixteenth")
+                                        }
+                                        if (item.toString().contains("pseventeenth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pseventeenth")
+                                        }
+                                        if (item.toString().contains("peighteenth")) {
+                                            navController.navigate("NewPhotoStoryScreen/peighteenth")
+                                        }
+                                        if (item.toString().contains("pnineteenth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pnineteenth")
+                                        }
+                                        if (item.toString().contains("ptwentieth")) {
+                                            navController.navigate("NewPhotoStoryScreen/ptwentieth")
+                                        }
+                                        if (item.toString().contains("ptwentyfirst")) {
+                                            navController.navigate("NewPhotoStoryScreen/ptwentyfirst")
+                                        }
+                                        if (item.toString().contains("ptwentysecond")) {
+                                            navController.navigate("NewPhotoStoryScreen/ptwentysecond")
+                                        }
+                                        if (item.toString().contains("ptwentythird")) {
+                                            navController.navigate("NewPhotoStoryScreen/ptwentythird")
+                                        }
+                                        if (item.toString().contains("ptwentyfourth")) {
+                                            navController.navigate("NewPhotoStoryScreen/ptwentyfourth")
+                                        }
+                                        if (item.toString().contains("ptwentyfifth")) {
+                                            navController.navigate("NewPhotoStoryScreen/ptwentyfifth")
+                                        }
+                                        if (item.toString().contains("ptwentysixth")) {
+                                            navController.navigate("NewPhotoStoryScreen/ptwentysixth")
+                                        }
+                                        if (item.toString().contains("ptwentyseventh")) {
+                                            navController.navigate("NewPhotoStoryScreen/ptwentyseventh")
+                                        }
+                                        if (item.toString().contains("ptwentyeighth")) {
+                                            navController.navigate("NewPhotoStoryScreen/ptwentyeighth")
+                                        }
+                                        if (item.toString().contains("ptwentyninth")) {
+                                            navController.navigate("NewPhotoStoryScreen/ptwentyninth")
+                                        }
+                                        if (item.toString().contains("pthirtieth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pthirtieth")
+                                        }
+                                        if (item.toString().contains("pthirtyfirst")) {
+                                            navController.navigate("NewPhotoStoryScreen/pthirtyfirst")
+                                        }
+                                        if (item.toString().contains("pthirtysecond")) {
+                                            navController.navigate("NewPhotoStoryScreen/pthirtysecond")
+                                        }
+                                        if (item.toString().contains("pthirtythird")) {
+                                            navController.navigate("NewPhotoStoryScreen/pthirtythird")
+                                        }
+                                        if (item.toString().contains("pthirtyfourth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pthirtyfourth")
+                                        }
+                                        if (item.toString().contains("pthirtyfifth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pthirtyfifth")
+                                        }
+                                        if (item.toString().contains("pthirtysixth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pthirtysixth")
+                                        }
+                                        if (item.toString().contains("pthirtyseventh")) {
+                                            navController.navigate("NewPhotoStoryScreen/pthirtyseventh")
+                                        }
+                                        if (item.toString().contains("pthirtyeighth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pthirtyeighth")
+                                        }
+                                        if (item.toString().contains("pthirtyninth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pthirtyninth")
+                                        }
+                                        if (item.toString().contains("pfortieth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfortieth")
+                                        }
+                                        if (item.toString().contains("pfortyfirst")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfortyfirst")
+                                        }
+                                        if (item.toString().contains("pfortysecond")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfortysecond")
+                                        }
+                                        if (item.toString().contains("pfortythird")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfortythird")
+                                        }
+                                        if (item.toString().contains("pfortyfourth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfortyfourth")
+                                        }
+                                        if (item.toString().contains("pfortyfifth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfortyfifth")
+                                        }
+                                        if (item.toString().contains("pfortysixth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfortysixth")
+                                        }
+                                        if (item.toString().contains("pfortyseventh")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfortyseventh")
+                                        }
+                                        if (item.toString().contains("pfortyeighth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfortyeighth")
+                                        }
+                                        if (item.toString().contains("pfortyninth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfortyninth")
+                                        }
+                                        if (item.toString().contains("pfiftieth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfiftieth")
+                                        }
+                                        if (item.toString().contains("pfiftyfirst")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfiftyfirst")
+                                        }
+                                        if (item.toString().contains("pfiftysecond")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfiftysecond")
+                                        }
+                                        if (item.toString().contains("pfiftythird")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfiftythird")
+                                        }
+                                        if (item.toString().contains("pfiftyfourth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfiftyfourth")
+                                        }
+                                        if (item.toString().contains("pfiftyfifth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfiftyfifth")
+                                        }
+                                        if (item.toString().contains("pfiftysixth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfiftysixth")
+                                        }
+                                        if (item.toString().contains("pfiftyseventh")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfiftyseventh")
+                                        }
+                                        if (item.toString().contains("pfiftyeighth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfiftyeighth")
+                                        }
+                                        if (item.toString().contains("pfiftyninth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pfiftyninth")
+                                        }
+                                        if (item.toString().contains("psixtieth")) {
+                                            navController.navigate("NewPhotoStoryScreen/psixtieth")
+                                        }
+                                        if (item.toString().contains("psixtyfirst")) {
+                                            navController.navigate("NewPhotoStoryScreen/psixtyfirst")
+                                        }
+                                        if (item.toString().contains("psixtysecond")) {
+                                            navController.navigate("NewPhotoStoryScreen/psixtysecond")
+                                        }
+                                        if (item.toString().contains("psixtythird")) {
+                                            navController.navigate("NewPhotoStoryScreen/psixtythird")
+                                        }
+                                        if (item.toString().contains("psixtyfourth")) {
+                                            navController.navigate("NewPhotoStoryScreen/psixtyfourth")
+                                        }
+                                        if (item.toString().contains("psixtyfifth")) {
+                                            navController.navigate("NewPhotoStoryScreen/psixtyfifth")
+                                        }
+                                        if (item.toString().contains("psixtysixth")) {
+                                            navController.navigate("NewPhotoStoryScreen/psixtysixth")
+                                        }
+                                        if (item.toString().contains("psixtyseventh")) {
+                                            navController.navigate("NewPhotoStoryScreen/psixtyseventh")
+                                        }
+                                        if (item.toString().contains("psixtyeighth")) {
+                                            navController.navigate("NewPhotoStoryScreen/psixtyeighth")
+                                        }
+                                        if (item.toString().contains("psixtyninth")) {
+                                            navController.navigate("NewPhotoStoryScreen/psixtyninth")
+                                        }
+                                        if (item.toString().contains("pseventieth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pseventieth")
+                                        }
+                                        if (item.toString().contains("pseventyfirst")) {
+                                            navController.navigate("NewPhotoStoryScreen/pseventyfirst")
+                                        }
+                                        if (item.toString().contains("pseventysecond")) {
+                                            navController.navigate("NewPhotoStoryScreen/pseventysecond")
+                                        }
+                                        if (item.toString().contains("pseventythird")) {
+                                            navController.navigate("NewPhotoStoryScreen/pseventythird")
+                                        }
+                                        if (item.toString().contains("pseventyfourth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pseventyfourth")
+                                        }
+                                        if (item.toString().contains("pseventyfifth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pseventyfifth")
+                                        }
+                                        if (item.toString().contains("pseventysixth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pseventysixth")
+                                        }
+                                        if (item.toString().contains("pseventyseventh")) {
+                                            navController.navigate("NewPhotoStoryScreen/pseventyseventh")
+                                        }
+                                        if (item.toString().contains("pseventyeighth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pseventyeighth")
+                                        }
+                                        if (item.toString().contains("pseventyninth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pseventyninth")
+                                        }
+                                        if (item.toString().contains("peightieth")) {
+                                            navController.navigate("NewPhotoStoryScreen/peightieth")
+                                        }
+                                        if (item.toString().contains("peightyfirst")) {
+                                            navController.navigate("NewPhotoStoryScreen/peightyfirst")
+                                        }
+                                        if (item.toString().contains("peightysecond")) {
+                                            navController.navigate("NewPhotoStoryScreen/peightysecond")
+                                        }
+                                        if (item.toString().contains("peightythird")) {
+                                            navController.navigate("NewPhotoStoryScreen/peightythird")
+                                        }
+                                        if (item.toString().contains("peightyfourth")) {
+                                            navController.navigate("NewPhotoStoryScreen/peightyfourth")
+                                        }
+                                        if (item.toString().contains("peightyfifth")) {
+                                            navController.navigate("NewPhotoStoryScreen/peightyfifth")
+                                        }
+                                        if (item.toString().contains("peightysixth")) {
+                                            navController.navigate("NewPhotoStoryScreen/peightysixth")
+                                        }
+                                        if (item.toString().contains("peightyseventh")) {
+                                            navController.navigate("NewPhotoStoryScreen/peightyseventh")
+                                        }
+                                        if (item.toString().contains("peightyeighth")) {
+                                            navController.navigate("NewPhotoStoryScreen/peightyeighth")
+                                        }
+                                        if (item.toString().contains("peightyninth")) {
+                                            navController.navigate("NewPhotoStoryScreen/peightyninth")
+                                        }
+                                        if (item.toString().contains("pninetieth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pninetieth")
+                                        }
+                                        if (item.toString().contains("pninetyfirst")) {
+                                            navController.navigate("NewPhotoStoryScreen/pninetyfirst")
+                                        }
+                                        if (item.toString().contains("pninetysecond")) {
+                                            navController.navigate("NewPhotoStoryScreen/pninetysecond")
+                                        }
+                                        if (item.toString().contains("pninetythird")) {
+                                            navController.navigate("NewPhotoStoryScreen/pninetythird")
+                                        }
+                                        if (item.toString().contains("pninetyfourth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pninetyfourth")
+                                        }
+                                        if (item.toString().contains("pninetyfifth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pninetyfifth")
+                                        }
+                                        if (item.toString().contains("pninetysixth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pninetysixth")
+                                        }
+                                        if (item.toString().contains("pninetyseventh")) {
+                                            navController.navigate("NewPhotoStoryScreen/pninetyseventh")
+                                        }
+                                        if (item.toString().contains("pninetyeighth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pninetyeighth")
+                                        }
+                                        if (item.toString().contains("pninetyninth")) {
+                                            navController.navigate("NewPhotoStoryScreen/pninetyninth")
+                                        }
+                                        if (item.toString().contains("phundredth")) {
+                                            navController.navigate("NewPhotoStoryScreen/phundredth")
                                         }
                                     }
                                 ) {

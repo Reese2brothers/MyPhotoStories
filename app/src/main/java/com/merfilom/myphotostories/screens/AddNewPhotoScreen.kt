@@ -63,14 +63,8 @@ import coil.request.ImageRequest
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.merfilom.myphotostories.R
-import com.merfilom.myphotostories.domain.models.photomodels.Photo1
 import com.merfilom.myphotostories.domain.models.photomodels.PhotoEmpty
-import com.merfilom.myphotostories.viewmodels.Photo1ViewModel
-import com.merfilom.myphotostories.viewmodels.Photo2ViewModel
-import com.merfilom.myphotostories.viewmodels.Photo3ViewModel
-import com.merfilom.myphotostories.viewmodels.Photo4ViewModel
-import com.merfilom.myphotostories.viewmodels.Photo5ViewModel
-import com.merfilom.myphotostories.viewmodels.PhotoEmptyViewModel
+import com.merfilom.myphotostories.viewmodels.photoviewmodels.PhotoEmptyViewModel
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
