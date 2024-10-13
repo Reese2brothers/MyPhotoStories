@@ -1,4 +1,4 @@
-package com.merfilom.myphotostories.screens
+package com.merfilom.myphotostories.screens.videostoryscreens
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController

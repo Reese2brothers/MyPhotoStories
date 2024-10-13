@@ -68,15 +68,6 @@ class Photo3ViewModel @Inject constructor(
             }
         }
     }
-    fun getAll3NewPhoto(): List<Photo3>  {
-        var photoList = emptyList<Photo3>()
-        viewModelScope.launch {
-            getAll3UseCase.photoExecute().collect { list ->
-                photoList = list
-            }
-        }
-        return photoList
-    }
     fun deleteAll3Photo(context : Context) {
         viewModelScope.launch {
             try {

@@ -250,7 +250,7 @@ fun MainScreen(context : Context, navController: NavController) {
                                 Card(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(160.dp)
+                                        .height(150.dp)
                                         .padding(4.dp)
                                         .background(Color.Transparent),
                                     shape = RoundedCornerShape(8.dp),

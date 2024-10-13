@@ -101,15 +101,15 @@ class Photo1ViewModel @Inject constructor(
             delete1UseCase.storyExecute(story1)
         }
     }
-    fun getAll1NewPhoto(): List<Photo1>  {
-        var photoList = emptyList<Photo1>()
-        viewModelScope.launch {
-            getAll1UseCase.photoExecute().collect { list ->
-                photoList = list
-            }
-        }
-        return photoList
-    }
+//    fun getAll1NewPhoto(): List<Photo1>  {
+//        var photoList = emptyList<Photo1>()
+//        viewModelScope.launch {
+//            getAll1UseCase.photoExecute().collect { list ->
+//                photoList = list
+//            }
+//        }
+//        return photoList
+//    }
     fun getAll1NewPhotoStory() {
         viewModelScope.launch {
             getAll1UseCase.storyExecute().collect { storyList ->

@@ -7,14 +7,14 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.merfilom.myphotostories.screens.AddNewPhotoScreen
-import com.merfilom.myphotostories.screens.EmptyNewPhotoStoryScreen
-import com.merfilom.myphotostories.screens.KeyAddNewPhotoScreen
+import com.merfilom.myphotostories.screens.photostoryscreens.AddNewPhotoScreen
+import com.merfilom.myphotostories.screens.photostoryscreens.EmptyNewPhotoStoryScreen
+import com.merfilom.myphotostories.screens.photostoryscreens.KeyAddNewPhotoScreen
 import com.merfilom.myphotostories.screens.MainScreen
 import com.merfilom.myphotostories.screens.MenuScreen
-import com.merfilom.myphotostories.screens.NewPhotoStoryScreen
-import com.merfilom.myphotostories.screens.NewVideoStoryScreen
-import com.merfilom.myphotostories.screens.ScreenBigPhoto
+import com.merfilom.myphotostories.screens.photostoryscreens.NewPhotoStoryScreen
+import com.merfilom.myphotostories.screens.videostoryscreens.NewVideoStoryScreen
+import com.merfilom.myphotostories.screens.photostoryscreens.ScreenBigPhoto
 import com.merfilom.myphotostories.screens.SplashScreen
 
 @Composable

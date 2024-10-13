@@ -68,15 +68,6 @@ class Photo4ViewModel @Inject constructor(
             }
         }
     }
-    fun getAll4NewPhoto(): List<Photo4>  {
-        var photoList = emptyList<Photo4>()
-        viewModelScope.launch {
-            getAll4UseCase.photoExecute().collect { list ->
-                photoList = list
-            }
-        }
-        return photoList
-    }
     fun deleteAll4Photo(context : Context) {
         viewModelScope.launch {
             try {

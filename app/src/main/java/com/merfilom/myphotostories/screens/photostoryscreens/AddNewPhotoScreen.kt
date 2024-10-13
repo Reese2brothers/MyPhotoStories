@@ -1,4 +1,4 @@
-package com.merfilom.myphotostories.screens
+package com.merfilom.myphotostories.screens.photostoryscreens
 
 import android.Manifest
 import android.content.Context
